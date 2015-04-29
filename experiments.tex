@@ -1,0 +1,157 @@
+\section{Experiments\label{sec:Experimentation}}
+
+
+As a validation study, we apply SOMAD on two independently developed SBSs, \emph{Home Automation} and \emph{FraSCAti}~\cite{SPE:SPE1077}. \emph{Home Automation} is an SBS made of 13 services and selected for comparison with the outcome produced by SODA, the so far unique state-of-the-art tool for antipatterns detection. Both tools were evaluated in terms of precision and recall, on one hand, and efficiency, on the other hand. We also apply SOMAD to \emph{FraSCAti}, an SBS almost 10 times larger than \emph{Home Automation}, which contains 91 components and 130 services.
+
+%\subsection{Assumptions}
+%
+%The experiments aim at validating the following three assumptions :
+%\newline
+%
+%\subsubsection*{A1. Accuracy }
+%
+%\noindent \emph{The algorithms have a recall of 100\%, i.e., all existing antipatterns are detected, and a precision higher than 75\%, i.e., more than three-quarters of detected antipatterns are true positive.} This assumption supports the accuracy of the association rule generation and the interpretation of association rules in the form of conjectures and metrics. This assumption is similar to the one stated for SODA, since we expect SOMAD to be at least as precise as SODA.
+%%Also,\emph{ }the recall of SODA was 100.0\% and
+%%its precision 92.5\% and F$_{1}$score of 92 for HomeAutomation. Even
+%%if SOMAD may be able to detect SOA antipatterns in every SOA technologies, because it
+%%we want SOMAD to be as precise as SODA for this particular SBS.
+%\newline
+%
+%\subsubsection*{A2. Performance}
+%
+%\noindent \emph{The computation time for the detection of antipatterns is as low as the one required in SODA, i.e., lower than one second per antipattern.} This assumption supports the performance of the underlying framework for the detection of antipatterns.
+%\newline
+%
+%\subsubsection*{A3. Extensibility}
+%
+%\noindent \emph{SOMAD is extensible for adding new antipatterns and detecting them.} Through this assumption, we show how well SOMAD, and in particular the metrics, with the underlying framework can be combined to detect new antipatterns.
+
+\subsection{Subjects}
+
+We apply SOMAD to detect six different SOA antipatterns described in Table \ref{tab:List-of-SOA}. In the description of each antipattern, we highlight in bold the characteristics relevant for their detection using our metrics.
+
+\subsection{Objects}
+
+A first round of experiments was performed on \emph{Home Automation}, the same system used in the validation of SODA. \emph{Home Automation} is an independently developed SCA-based system for remotely controlling basic household functions (i.e., temperature, electrical instruments, medical emergency support, etc.) in home care support for elderly. It also includes a set of 7 predefined scenarios for test and demonstration purposes. Two different versions of the system were used: the original version, made of 13 services, and an intentionally degraded version in which services have been modified and new ones added in order  to inject some antipatterns. The changes were performed by a third-party to avoid bias in the results. Given the lack of freely available SBSs, the second round was performed on FraSCAti~\cite{SPE:SPE1077}, the runtime support of \emph{Home Automation}. FraSCAti is also an SCA-based system made of more than 90 components and over 130 services scattered between components. A component exposes at least one service and services expose methods. Unlike Home Automation, FraSCAti does not have predefined scenarios--in reality it provides some unit tests, but not complete feature coverage. The detection was performed by instrumenting FraSCAti to produce execution traces as described in Section~\ref{details}. As FraSCAti is a runtime support for SOA systems, we loaded and ran diverse SBSs of different technologies (SCA, REST, Web Services, RMI-based) and then, handle these systems to have a maximum feature coverage. The detection of SOA antipatterns in FraSCAti has been performed at the component level instead of service-level since the system architecture is documented at that level while the subsequent validation will be based on this documentation. Moreover, it was empirically established that SCA-based systems suffer from the same architectural flaws as pure SOA systems. Details on the systems including all the scenarios and involved services are available online at http://sofa.uqam.ca/somad.
+
+\subsection{Process}
+
+We applied SOMAD for the detection of the six SOA antipatterns on the two targeted SBSs. First, we run the seven scenarios of \emph{Home Automation} on its two versions, and then the six scenarios of FraSCAti.
+%Indeed HomeAutomation and FraSCAti are SCA applications and did support this technique.
+%However, if technologies are different we should used other mechanisms like explain in the first step of SOMAD.
+Then, we recreated transactions from the execution
+traces and run our algorithm for rule generation, with a support of 40\% and a confidence of 60\%, the corresponding sequential association rules. The step that follows consisted in interpreting the generated association rules. For this purpose, we computed the metrics associated to hypotheses that fit the textual descriptions of the six SOA antipatterns. After this step of interpretation, we obtained for each SBS the list of suspicious services involved in the antipatterns. Finally, we validated the detection results in terms of precision and recall by analyzing the suspicious services manually. Precision estimates the ratio of true antipatterns identified among the detected antipatterns, while recall estimates the ratio of detected antipatterns among the existing antipatterns. This validation has been performed manually by an independent software engineer, whom we provided the descriptions of antipatterns, the two versions of the analyzed system \emph{Home Automation}, and the system FraSCAti with a printed description of its architecture available online on the FraSCAti web site (http://frascati.ow2.org). For both systems, we compared the results with the ones obtained by SODA. For FraSCAti, we reported the detection results to their development team and got their feedback as a objective validation.
+
+
+
+\subsection{Results}
+
+Table \ref{tab:Results-comparison-between} presents the results
+for the detection of the six SOA antipatterns on the original and evolved version of \emph{Home Automation}. For each SOA antipattern, the table reports the version analyzed of \emph{Home Automation}, the services detected automatically by SOMAD, the services identified manually by the software engineer, the metric values, the recall and precision, the computation time, and finally, the F-measure~\cite{ng2010identification}. Similarly, Table \ref{tab:Results-comparison-between-1} provides the detection results on FraSCAti. We recall that the metric values reported in the tables do not represent absolute values (e.g. for NM, the exact number of methods exposed), but rather elicit what we called the \emph{usage representation} of a SBS. And in particular, the metric values are weighted by the fraction $\frac{support}{confidence}$ for highlighting most confident and supported association rules. Thus, a number of methods (NM) of 2 means that among the generated association rules, there are 2 methods that appear in the rules with a high support and confidence.
+
+\input{experiments_tables.tex}
+
+
+\vspace{-1.5cm}
+\subsection{Details of the Results}
+
+We present the detection results of SOMAD while comparing them to SODA, both on the system \emph{Home Automation}. The results with SOMAD are quite similar to the ones obtained with SODA, except for \emph{The Knot} and \emph{Bottleneck Service} antipatterns.
+
+For example, \texttt{IMediator} has been detected and identified as a \emph{Multi Service}, both in SOMAD and SODA, because of its high number of methods (NM $\geqslant$ 2), its high number of matches (NMA $\geqslant$ 3.8) and its low cohesion (COH $\leqslant$ 0.5). These metric values have been evaluated as high and low in comparison with the metric values of \emph{Home Automation}. For example, for the metric NM, the boxplot estimates the high value of NM in \emph{Home Automation} as equal to 2. Similarly, the detected \emph{Tiny Service} has a very low number of methods (NM $\leqslant$ 1) and a high outgoing coupling (OC $\geqslant$ 4) according to the boxplot. In the original version of \emph{Home Automation}, we did not detect any \emph{Tiny Service}. An independent engineer extracted one method from \texttt{IMediator} and moved it into a new service named \texttt{MediatorDelegate}; this newly injected service has been detected as a \emph{Tiny Service}. Two occurrences of \emph{Chatty Service} have been discovered in \emph{Home Automation}, both in SOMAD and SODA. \texttt{PatientDAO} and \texttt{IMediator} have a high number of matches (NMA $\geqslant$ 3.8), which mean that the service \emph{talks} too much, and they have a high number of different partners (NDP $\geqslant$ 0.6).
+
+\texttt{PatientDAO} has been detected as a \emph{Knot} because it has a high  cyclic invocation dependencies
+(CID $\geqslant$ 2) and a low cohesion (COH $\leqslant$ 0.5). The metric CID allows the identification of cyclic invocation dependency.
+In \emph{Home Automation}, the set of services \texttt{PatientDAO1}, \texttt{PatientDAO2}, \texttt{PatientDAO3}, \texttt{PatientDAO4} are tightly coupled because each of them represents a part of a patient's information (name, address, phone number). Therefore, cyclic invocations between these services appear when information about a patient are requested. SOMAD does not report the false positive, \texttt{IMediator}, reported by SODA, and thus obtains a better precision for this antipattern.
+
+Three services have been detected as \emph{BottleNeck Services}: \texttt{IMediator} \texttt{PatientDAO}, and \texttt{SunSpotService} because of their high outgoing and incoming coupling (IC $\geqslant$ 4 and  OC $\geqslant$ 3). This time, it is SOMAD that reports the false positive, \texttt{SunSpotService}, and thus decreases its precision compared to SODA.
+
+Finally, we detected both in SOMAD and SODA, the transitive chain of invocations \texttt{IMediator} $\rightarrow$ \texttt{PatientDAO} $\rightarrow$ \texttt{PatientDAO2} $\rightarrow$ \texttt{SunSpotService} (LC $\geqslant$ 4). In both approaches, the false positive \texttt{SunSpotService} has been reported.
+\newline
+We now present the detection results of SOMAD on FraSCAti.
+
+\texttt{SCA-Parser} is suspected to be a \emph{Tiny Service} because
+it includes a low number of methods (NM equal 1) and a high outgoing coupling
+(OC equal 3). A manual code inspection of FraSCAti revealed that \texttt{SCA-Parser} contains only one interface method, named \texttt{parse(...)}. The development team of FraSCAti validated this antipattern. They indicated that this service can be invoked alone when only a reading of a SCA file is requested. However, FraSCAti performs more tasks that just reading an SCA file, and these other tasks are performed by other services such as \texttt{AssemblyFactory}. This explains the high outgoing coupling.
+
+SOMAD did not detect any \emph{Multi Service} in FraSCAti.  However, the manual inspection of FraSCAti allowed the identification of the component \texttt{Explorer-GUI} as a \emph{Multi Service}. The FraSCAti development team confirmed that this component uses a high number of services provided by other components of FraSCAti. Indeed, this component encapsulates the graphical interface of FraSCAti Explorer, which aims to provide an exhaustive interface of FraSCAti functionalities. SOMAD was not able to detect it because the execution scenarios did not involve the graphical interface of FraSCAti Explorer.
+
+SOMAD did not detect any \emph{Chatty Service} in FraSCAti. No service has a very high number of matches (NMA) and a very high number of different partners (NDP), respectively higher than 70 and 24. This means that no service appears more than 70 times in the set of association rules and communicates with more than 24 different other services. The manual code inspection confirmed also that there was no \emph{Chatty Service} in FraSCAti. The component \texttt{Metamodel-provider} is suspected to be part of a Knot because of its low cohesion (COH $\leqslant$ 0.2) and its very high cyclic invocation dependencies (CID $\geqslant$ 25).
+The validation by the FraSCAti team has only confirmed that this component was implemented by many other components, but they did not agree on the specification of this antipattern. However, the independent software engineer validated this detection.
+
+
+%Différents composants implantent ce service/interface. L'interface associée fournit une seule méthode getEPackage().
+%Ce service est utilisé uniquement par le composant sca-parser.
+%
+%"The Knot is a set of very low cohesive services, which are tightly coupled. These services are thus less reusable. Due to this complex architecture, the availability of these services can be low, and their response time high. "
+%
+%Ici j'ai du mal à comprendre pourquoi ce service est The Knot.
+%Je suis d'accord sur le point "These services are thus less reusable" car ce service a été conçu comme un point d'extension (plugin) spécifique au sca-parser (donc pas pour être réutilisé ailleurs).
+
+%Métamodel-provider et ses implémentations sont considérés comme faisant partie d’un Knot, car en moyenne, la proportion de méthodes consommées lors de l’invocation d’un service par rapport aux nombre de méthodes exposées est faible (COH :0.2) et qu’il est tour à tour, présent en tant qu’antécédent (initiateur d’une action) et en tant que conséquent (il est appelé par l’initiateur) d’une règles d’association (CIN :25)
+
+SOMAD detected three occurrences of the \emph{BottleNeck Service} antipattern, \texttt{SCA-Parser}, \texttt{Composite-Parser}, and \texttt{Metamodel-provider}, the last of which was identified as a false positive. These services have been identified as  \emph{BottleNeck Services} because they have a high outgoing and incoming coupling (OC and IC $\geqslant$ 3). The FraSCAti development team confirmed that \texttt{SCA-Parser} is highly used by other services.
+
+%[SCA-PARSER][COMPOSITE-PARSER] et [METAMODEL] ont été détectés comme bottleneck car beaucoup de composants différents font appel à eux, et qu’eux même font appel à beaucoup de composants différent (Incoming Coupling : 3 & Outgoing Coupling :3). Cependant, [METAMODEL] n’avais pas été considéré comme un  BottleNeck lors de l’analyse manuelle.
+
+%Philippe: Le service sca-parser est invoqué pour lire chaque fichier SCA et en autres les fichiers .composite.
+%Donc oui ce service est "highly used by other services or clients".
+
+Finally, \texttt{Composite-Parser} has been detected and identified as a \emph{Chain Service}, whereas \texttt{Composite-Manager} is a false positive. \texttt{Composite-Parser} is involved in a long transitive chain of invocations (LC $\geqslant$ 4). The FraSCAti development team validated this antipattern and indicated that this service uses a delegation chain to perform its behavior.
+
+
+
+
+We can observe that \texttt{Composite-Parser} and \texttt{SCA-Parser} are very suspicious services. They are both involved in two antipatterns. These services are highly coupled with other services and are part of a long transitive invocation chain. The presence of such antipatterns in a system is not surprising because there is no other way to develop a parser without introducing a high coupling and high transitivity.
+
+
+\rv{1-3} \rv{3-3} \red{Finally, for both systems, the average computational time of SOMAD is 174ms, whereas the one of SODA is 469ms. SOMAD clearly outperforms SODA. This is explained by the fact that for each service, SODA unstacks and executes a pile of aspects including the code for the computation of metrics whereas SOMAD computes metrics directly on traces using association rules.} In conclusion, FraSCAti is performing reasonably well towards the antipattern detection. Few services have been detected as antipatterns compared to the high number of FraSCAti components/services. Mainly, \texttt{SCA-Parser} is on the critical path of all processing performed by FraSCAti.%Les composants [COMPOSITE-PARSER] et [COMPOSITE-MANAGER] ont été détecté comme faisant partie d’un service chain car ils sont les premiers élément d’un chaine d’invocation supérieur de 5 appel (LC :5). [COMPOSITE-MANAGER] n’avais pas été révélé comme un Chain lors de l’analyse manuelle.
+
+%Philippe: Ce service est implanté par un composant qui utilise une chaine de délégation pour réaliser son comportement (http://frascati.ow2.org/doc/1.4/ch12s04.html#d95e2673).
+
+% \subsection{Discussion on the assumptions}
+%
+%\noindent We now verify each of the three assumptions stated previously using the detection results.
+%\newline
+%
+%
+%
+%\subsubsection*{A1. Accuracy }
+%
+%
+%\noindent \emph{The algorithms have a recall of 100\%, i.e., all existing antipatterns are detected, and a precision higher than 75\%, i.e., more than three-quarters of detected antipatterns are true positive.} As indicated in Tables \ref{tab:Results-comparison-between} and \ref{tab:Results-comparison-between-1}, for SOMAD, we obtain a recall of 100\%, which means all existing antipatterns are detected, whereas the precision is higher than 84.2\%. The recall and precision of SOMAD are mostly comparable to SODA, with a slightly better precision for the former. SOMAD obtains a F$_{1}$measure of 94.2\%, while SODA obtains 92\%. Moreover, SOMAD obtains a F$_{1}$measure of 90.82\% on the second SBS analyzed. Thus, we validate our first assumption.
+%%The differences aren't much and it possible that, depending on the SCA SBS analysed, SODA will have a better F$_{1}$score. However, SODA is only SCA capable while SOMAD can be applied on every SOA technologies.
+%\newline
+%
+%\subsubsection*{A2. Performance}
+%
+%\noindent \emph{The computation time for the detection of antipatterns is as low as the one required in SODA, i.e., lower than one second per antipattern.} We perform our experiments on an Intel Dual Core at 3.30GHz with 4GB of RAM. The experiments have been performed ten times and we provided the average of the detection times for each SOA antipattern. For almost all antipatterns, the detection time is lower than one second, except for the detection of the \emph{Knot} in FraSCAti. The average computational time of SOMAD is 68ms, whereas the one of SODA is 302ms. SOMAD clearly outperforms SODA with the relatively same hardware (only a difference of 1GB of RAM). However, in SOMAD, computation times include the analysis of execution logs. Thus, the time considerably increases with the size of execution logs and their analysis. More than 80\% of the actual detection time is devoted to the sequential association rule generation. Indeed, while the factor between \emph{Home Automation} and FraSCAti is 10, the detection time is multiplied by almost 12. However, an SBS composed of 90 components on more than 130 services is already a large scale SBS and the detecting time is under 1s. Thus, we have shown that we support our second assumption.
+%
+%
+%\subsubsection*{A3. Extensibility}
+%
+%\noindent \emph{SOMAD is extensible for adding new antipatterns and detecting them.} SODA performs successfully the detection of 10 different antipatterns, while SOMAD can
+%only detect 6 antipatterns. However most other antipatterns specified with SODA are detected purely statically. Moreover, the proof-of-concept of SOMAD
+%was only performed for the detection of three antipatterns with four metrics and two conjectures. It takes to our team members less than a half working day for the addition of each new metric. Our third and last assumptions are thus validated.
+\subsection{Threats to validity}
+
+The main threat to the validity of our results corresponds to the \emph{external validity}, i.e., the possibility to generalize the current results to other SBSs. Given the lack of freely available systems, we have done our best to obtain real systems such as FraSCAti and we experimented with two versions of \emph{Home Automation}. However, we plan to run these experiments on other SBSs in the future, with special focus on SBSs implementing other SOA technologies, such as REST and Web services. Regarding the \emph{internal validity}, the detection results depend on our hypotheses. Although we did not perform our experiments on a representative set of antipatterns as done with SODA, we obtained comparable results in terms of precision and recall. The subjective nature of interpreting the association rules and validating antipatterns is a threat to the \emph{construct validity}. We control this threat by specifying our hypotheses based on a literature review on antipatterns and by involving in our study an independent engineer and the FraSCAti development team. Finally, we minimize the threats to \emph{reliability validity} by automating the generation of association rules.
+
+%
+%
+%We try to lessen this threaten by  and these conjectures
+%can be considered as relevant because they able SOMAD to match the
+%SODA performances on a consequent set of antipatterns.
+%
+%
+%As our approach
+%focuses on executions traces threats concerning the possibility to
+%apply SOMAD on other SBSs (\emph{external validity}) are also low
+%and we successfully applied it on two different abstraction (services
+%and components) and two different SBSs (\emph{Home Automation} and FraSCAti).
+%The subjectivity of specifying an SOA antipattern can be lessen because
+%of the adaptability of the approach. Indeed, it's easy to detect antipatterns
+%based on other metrics or other parts of values.Thus, the \emph{construct validity}
+%is a controlled threat. By confronting our approach to existing one
+%and automating the detection of SOA antipatterns we reduce the \emph{reliability
+%validity. }
+

@@ -1,0 +1,24 @@
+Architectural (or design) quality is essential for building well-designed, maintainable,
+and evolvable SBSs. Patterns and antipatterns have been recognized
+as one of the best ways to express architectural concerns and solutions. However, unlike Object Oriented (OO) antipatterns, methods and techniques for the detection and correction of SOA antipatterns are still in their infancy. Several methods and tools exist for the detection \cite{DuBois04-WCRE-RefactoringCouplingCohesion, Kessentini10-ASE-Deviance, Lanza06-OOMetricsPractice, Munro05-BadSmellIdentification, Settas:2011:SSA:1943774.1943847} and correction  \cite{DuBois04-WCRE-RefactoringCouplingCohesion, Simon01-CSMR-MetricsBasedRefactoring, Trifu03-StrategyBasedDesignFlaws} of antipatterns in OO systems and various books have been published on that topic. For example, Brown et al. \cite{Brown98-AntiPatterns} introduced a collection of 40 antipatterns, Beck, in Fowler’s highly-acclaimed book on refactoring \cite{kentbeck},
+compiled 22 code smells that are low-level antipatterns in source code, suggesting where engineers should apply refactorings. One of the root causes of OO antipatterns is the adoption of a procedural design style in OO system whereas for SOA antipatterns, it stems from the adoption of an OO style design in SOA
+system \cite{Kral07-SOAAntipatterns}. However, these OO detection methods and tools cannot be directly
+applied to SOA. Indeed, SOA focuses on services as first-class entities whereas
+OO focuses on classes, which are at the lower level of granularity. Moreover, the
+highly dynamic nature of an SOA environment raises several challenges that are
+not faced in OO development and requires dynamic analysis.
+Other related works have focused on the detection of specific antipatterns
+related to system’s performance and resource usage and–or given technologies.
+For example, Wong et al. \cite{Wong:2010:REU:1919284.1919587} used a genetic algorithm for detecting software
+faults and anomalous behavior related to the resource usage of a system (e.g.,
+memory usage, processor usage, thread count). Their approach is based on utility
+functions, which correspond to predicates that identify suspicious behavior
+based on resource usage metrics. For example, a utility function may report an
+anomalous behavior corresponding to spam sending if it detects a large number
+of threads. In another relevant work, Parsons et al. [21] introduced an approach
+for the detection of performance antipatterns specifically in component-based
+enterprise systems (in particular, JEE applications) using a rule-based approach
+relying on static and dynamic analysis.
+Although different, all these previous works on OO systems and performance
+antipattern detection form a sound basis of expertise and technical knowledge
+for building methods for the detection of SOA antipatterns.

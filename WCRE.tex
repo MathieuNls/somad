@@ -1,0 +1,80 @@
+\documentclass[conference]{IEEEtran}
+\usepackage[T1]{fontenc}
+\usepackage{array}
+\usepackage{calc}
+\usepackage{multirow}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[normalem]{ulem}
+\usepackage{graphicx}
+\usepackage{breakurl}
+\usepackage[compact]{titlesec}
+\titlespacing{\section}{9pt}{8pt}{4pt}
+\titlespacing{\subsection}{7pt}{5pt}{1pt}
+\titlespacing{\subsubsection}{1pt}{1pt}{*0}
+\setlength{\skip\footins}{0.2cm}
+\makeatletter
+
+\usepackage[font=small]{caption} 
+
+\providecommand{\tabularnewline}{\\}
+
+ \let\oldforeign@language\foreign@language
+ \DeclareRobustCommand{\foreign@language}[1]{%
+   \lowercase{\oldforeign@language{#1}}}
+\theoremstyle{plain}
+\newtheorem{thm}{\protect\theoremname}
+\theoremstyle{plain}
+\newtheorem{conjecture}[thm]{\protect\conjecturename}
+
+
+\ifCLASSOPTIONcompsoc
+
+\usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\else
+\usepackage[caption=false,font=footnotesize]{subfig}
+\usepackage{multicol}
+
+
+\fi
+
+\providecommand{\conjecturename}{Hypothesis}
+\providecommand{\theoremname}{Theorem}
+
+
+\newcommand\petko[1]{#1}  
+
+\newcommand{\red}[1]{{#1}}
+\newcommand{\rv}[1]{}
+
+\makeatother
+
+\clubpenalty = 10000
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
+
+\begin{document}
+
+\title{Improving SOA Antipatterns Detection in Service Based Systems by Mining Execution Traces}
+
+\author{Mathieu Nayrolles, Naouel Moha, and Petko Valtchev\\
+LATECE Team, D\'epartement d'informatique, Universit\'e du Qu\'ebec \`a Montr\'eal, Canada\\
+mathieu.nayrolles@gmail.com, \{moha.naouel,valtchev.petko\}@uqam.ca}
+
+\maketitle
+\thispagestyle{empty}
+
+\input{Abstract.tex}
+\input{Intro.tex}
+\input{RelatedWorks.tex}
+\input{Approach.tex}
+\input{experiments.tex}
+\input{conclusion.tex}
+\input{acknowledgment.tex}
+\vspace{0.2cm}
+\bibliographystyle{IEEEtran}
+\bibliography{bib/Prop-WCRE}
+
+
+\end{document}

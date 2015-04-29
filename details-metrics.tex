@@ -1,0 +1,142 @@
+\subsection*{Complex Metrics.\label{detail-metrics} \protect \protect \\
+ }
+
+% The metric named \textbf{\textit{CID}} (Cross Invocation Dependencies)
+%is paramount for the detection of antipattern manifestations dug into	
+%the logs. Indeed, the metric would explore the typical interactions
+%between services while ignoring less frequent ones (absent from the
+%mining method output due to the support threshold). To retrieve this
+%information CID counts all association rules where a service A \emph{(Sa)}
+%is present in the \emph{antecedent} and a service B \emph{(Sb)} in
+%the \emph{consequent} or \textit{vice versa}. %plus the one where \emph{(Sb)} is antecedent and \emph{(Sa)} consequent.
+% %Both values are further weighted by the factor $\frac{NDP(S)}{CIN(S,_)}$. Therefore, a coupling will be
+%%higher if the service the targeted service communicates with, represents a large part of
+%%the overall number of partners of the targeted service. 
+%Furthermore, we define a transitive version of the previous coupling
+%assessors, named \textbf{\textit{TC}} (Transitive Coupling). TC is
+%aimed at spotting a common antipattern in SOA, the \emph{Service Chain}
+%(see above). First, observe that the fact that a pair of services
+%does not communicate directly does not mean that they are not coupled:
+%that is the founding idea of Service Chain and of our metric too.
+%%to,
+%%because if one the service fails, the whole set of services fail too.\petko{All this is intuitive, yet does not preclude any specific form of the metric function. The explanation should match the formula (which needs to be fixed beforehand, of course)} 
+%To identify transitive coupling manifestations within the extracted
+%association rules, which is more challenging than the direct coupling,
+%we need to capture describing a chain: e.g. a service $S_{a}$ is
+%in the antecedent of a rule, $S_{b}$ is in the consequent of another
+%rule and both rules are connected by means of a third service $K$
+%that appears in the consequent of the first rule and in the antecedent
+%of the second one. Longer chains are possible as well. Thus, in the
+%basic case, we could have {[}A{]}$\rightarrow${[}B{]} and {[}B{]}$\rightarrow${[}C{]},
+%with this configuration, A and C are not directly coupled but if C
+%fails, there are good chances that A and B would fail too. %\petko{This part is still unconvincing. I was expecting, in vain, it to gradually become more rigorous. Obviously we'll have to discuss all the stuff after the submission.}
+
+
+ 
+
+
+%\begin{figure*}
+%\centering{}%
+%\begin{tabular}{|r|l|}
+%\hline 
+%Number of Matches (NMA(S)) & $\#\{X\rightarrow Y\in AR_{s}\mid S\lessdot(X\Cup Y)\}$ \} \tabularnewline
+%\hline 
+%\multirow{2}{*}{%\vspace{0.3cm}\tabularnewline
+%Number of Diff. Partners (NDP(S))} & $\#\{K\mid X\rightarrow Y\in AR_{s},S\lessdot X,K\lessdot Y\}$ \tabularnewline
+% & $+\#\{K\mid X\rightarrow Y\in AR_{s},S\lessdot Y,K\lessdot X\}$\tabularnewline
+%\hline 
+%\multirow{2}{*}{% \vspace{0.3cm} 
+%Cross Invocation Dependencies (CID($S_{a},S_{b}$))} & $\#\{X\rightarrow Y\in AR_{s}\mid S_{a}\lessdot X,S_{b}\lessdot Y\}$ \tabularnewline
+% & $+\#\{X\rightarrow Y\in AR_{s}\mid S_{a}\lessdot Y,S_{b}\lessdot X\}$ \tabularnewline
+%\hline 
+%%\vspace{0.3cm}\tabularnewline
+%Incoming Coupling (IC(S)) & $\sum_{L\in\{K\mid X\rightarrow Y\in AR_{s},K\lessdot X,S\lessdot Y\}}\frac{CID(S,L)}{NDP(S)}$ \tabularnewline
+%\hline 
+%% \#\{K \mid X \rightarrow Y \in AR_{s}, K  \lessdot X , S  \lessdot Y\}*  
+%%\vspace{0.3cm}\tabularnewline
+%Outgoing Coupling (OC(S)) & $\sum_{L\in\{K\mid X\rightarrow Y\in AR_{s},S\lessdot X,K\lessdot Y\}}\frac{CID(L,S)}{NDP(S)}$ \tabularnewline
+%\hline 
+%%$\#\{K \mid X \rightarrow Y \in AR_{s}, S  \lessdot X , K  \lessdot Y\}  *  \frac{NPD(X)}{CIN(X,Y)}\}$ \petko{Fraction CANNOT BE TRUE}\\
+%%\vspace{0.3cm}\tabularnewline
+%Transitive Coupling (TC$(S_{a},S_{b})$) & $\#\{K\mid X\rightarrow Y\in AR_{s},S_{a}\lessdot X,S_{b}\lessdot Y,({[S_{a},K]\Subset X}\vee[K,S_{b}]\Subset Y)\}$ \tabularnewline
+%\hline 
+%%K \lessdot (X \Cup Y), 
+%%\mathieu{If K isn't includes in X nor Y, how can we count it ? The algorithm count all K present between X_{0} and Y_{last}}\\
+%%\vspace{0.3cm}\tabularnewline
+%Number of Method (NM(S)) & $\#\{K\mid X\rightarrow Y\in AR_{m},K\in M_{s},K\lessdot(X\Cup Y)\}$\tabularnewline
+%\hline 
+%%\mathieu{Does it look correct now ?} \\
+%%\vspace{0.3cm}\tabularnewline
+%Cohesion (COH(S)) & $\frac{NDP(S)}{NM(S)}$ \tabularnewline
+%\hline 
+%\end{tabular}
+%
+%\caption{Metrics \textcolor{red}{$\Cup$ : append on sequences; $\Subset$ : sub-sequence-of
+%relationship; and A $\lessdot$ B : A appears inside B.}}
+%
+%
+%\label{Metric}
+%\end{figure*}
+%
+%
+%%\emph{Metric 1\label{Metric-1--} - Number of Match (NMA)}
+%%%
+%%\begin{eqnarray*}
+%%%\sum(S-,-S) & \in|AR_{s}|
+%%\mbox{NMA}(S) & = & \#\{X \rightarrow Y \in AR_{s}, S  \biguplus (X \cup Y) \}
+%%\end{eqnarray*}
+%%\emph{Metric 2 - Number of different partners (NDP)}
+%%%
+%%\begin{eqnarray*}
+%%%\sum(S-,\nexists K) & + & \sum(\nexists K,-S)\in|AR_{m}|
+%%\mbox{NDP}(S) & = & \#\{K \mid X \rightarrow Y \in AR_{s}, S  \biguplus X , K  \biguplus Y\} \\
+%%& + & \#\{K \mid X \rightarrow Y \in AR_{s}, S  \biguplus Y , K  \biguplus X\}
+%%\end{eqnarray*}
+%%\emph{Metric 3 - Cross Implies Number(CIN)}
+%%%
+%%\begin{eqnarray*}
+%%\mbox{CIN}(S_{a},S_{b}) & = & \#\{X \rightarrow Y \in AR_{s} \mid S_{a}  \biguplus X , S_{b}  \biguplus Y \} \\
+%%& + & \#\{X \rightarrow Y \in AR_{s} \mid S_{a}  \biguplus Y , S_{b}  \biguplus X \}
+%%%\sum(S_{a}-,-S_{b}) & + & \sum(S_{b}-,-S_{a})\,\in|AR_{s}|
+%%\end{eqnarray*}
+%%\emph{Metric 4 - Incoming Coupling (IC)}
+%%%
+%%\begin{eqnarray*}
+%%%\sum(K,-S) & \in & |AR_{s}|
+%%\mbox{IC}(S) & = & \#\{K \mid X \rightarrow Y \in AR_{s}, K  \biguplus X , S  \biguplus Y\} \\
+%%& * & \{NPD(Y)/CIN(X,Y)\}
+%%\end{eqnarray*}
+%%\emph{Metric 5 - Outgoing Coupling (OC)}
+%%%
+%%\begin{eqnarray*}
+%%%\sum(S-,K) & \in & |AR_{s}|
+%%\mbox{OC}(S) & = & \#\{K \mid X \rightarrow Y \in AR_{s}, S  \biguplus X , K  \biguplus Y\} \\
+%%& * & \{NPD(X)/CIN(X,Y)\}
+%%\end{eqnarray*}
+%%\emph{Metric 6 - Transitive Coupling (TC)}\petko{How do we reformat this one?}
+%%\begin{eqnarray*}
+%%%\sum(S-,K) & \in & |AR_{s}|
+%%\mbox{TC}(S_{a}, S_{b}) & = & \#\{K \mid X \rightarrow Y \in AR_{s}, S_{a}  \biguplus X , S_{b}  \biguplus Y \\
+%%& , & K \ni X, K \ni Y \}
+%%\end{eqnarray*}
+%%\emph{Metric 7 - Number Of Methods (NM)}
+%%%
+%%\begin{eqnarray*}
+%%% & \sum(M_{s}-,-M_{s}) & \in & |AR_{m}|
+%%\mbox{NM}(S) & = & \#\{K \mid X \rightarrow Y \in AR_{m}, K \in M_{s}\}
+%%\end{eqnarray*}
+%%\emph{Metric 8 - Cohesion (COH)}
+%%%
+%%\begin{eqnarray*}
+%%% & \frac{NPD}{NM} & \in|AR_{m}|
+%%\mbox{COH}(S) & = & \frac{NPD(S)}{NM(S)}
+%%\end{eqnarray*}
+%
+%
+%
+%
+%\vspace{0.15cm}
+% After having presented our antipattern detection tools based on service/method
+%associations and on metrics on top of these, in the next section,
+%we elaborate on their application to real SBSs.
+

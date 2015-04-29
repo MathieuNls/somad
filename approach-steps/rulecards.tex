@@ -1,0 +1,116 @@
+\vspace{0.10cm}
+
+\noindent \emph{Step 2. Specification of SOA Antipatterns:} The combination of metrics defined in the previous step allows the specification of SOA antipatterns in the form of sets of rules, called \textit{rule cards}.
+\vspace{0.15cm}
+\\
+\noindent For the individual
+metrics and combinations thereof, the values that trigger the detailed
+examination of a case are not fixed beforehand. Instead, we use a
+boxplot-based statistical technique that exploits the distribution
+of all values across the sets of services, methods, and rules. Moreover,
+the computed values are further weighted using the quality metrics
+for associations, i.e. support and confidence, so that the strongest
+rules could be favored. The \textit{rule cards} used to specify SOA  antipatterns are presented in Figure~\ref{fig:rules}. As an example, the rule card corresponding to the Tiny Service specification (Figure 3(b)) is composed of three rules. The first one (line 2) is the intersection of two rules (lines 3, 4), which define two metrics: a high Outgoing Coupling (OC) and a low Number of Method (NM).
+%We determine if a value it's high or not with the boxplot statistical
+%method. A boxplot distinguish differences between population of values
+%using their statistical distribution. Thus, using this technique,
+%we don't have to set subjective thresholds to detect antipatterns.
+%Moreover, the values are weighted by $\frac{support}{confidence}$
+%for highlighting most confident and supported association rules.
+%The rule cards used to detect the individual antipatterns are as
+%follows. %We now present how these metrics based on our conjectures can match
+%%the textual description of SOA antipatterns.
+%\textit{Multi-service} is signaled whenever high values of \textbf{NMA} and
+%\textbf{NM} co-occur with low values of \textbf{COH}. For \textit{Tiny service}, high
+%values of \textbf{OC} with low values of \textbf{NM} are indicative. Very high values
+%of \textbf{NMA} and \textbf{NPD} (i.e. outliers in the boxplot), correspond to the \textit{Chatty service} while \textit{Bottleneck} is characterized
+%by high values of both \textbf{IC} and \textbf{OC}.  In addition of antipatterns detection describe earlier, we can use our two most complex metrics--\textbf{CID} and \textbf{TC}--to detect other SOA antipatterns. The \textit{Knot} typically involves low values of \textbf{COH}
+%combined with high values of \textbf{CID}. Finally,  \textit{Service chain} corresponds
+%to the maximal distance between services. Here the distance reflects the (maximal) number of calls necessary to reach one of the services from the other one and it is measured by \textbf{TC}.
+
+\begin{figure}
+\begin{small}
+\scriptsize
+1~RULE\_CARD:~\emph{\textbf{MultiService}}~\{\\
+2~~RULE:~\emph{\textbf{MultiService}}\{INTER~\emph{\textbf{LowCohesion}}~\emph{\textbf{ManyMethods}}~\emph{\textbf{ManyMatches}}\};\\
+3~~RULE:~\emph{\textbf{LowCohesion}}\{COH~LOW\};\\
+4~~RULE:~\emph{\textbf{ManyMethods}}\{NM~HIGH\};\\
+5~~RULE:~\emph{\textbf{ManyMatches}}\{NMA~HIGH\};\\
+6~\};
+\vspace{-0.2cm}
+\begin{center}
+(a) Multi Service
+\end{center}
+\vspace{-0.2cm}
+1~RULE\_CARD:~\emph{\textbf{TinyService}}~\{\\
+2~~RULE:~\emph{\textbf{TinyService}}\{INTER~\emph{\textbf{HighOutgoingCoupling}}~\emph{\textbf{FewMethods}}\};\\
+3~~RULE:~\emph{\textbf{HighOutgoingCoupling}}\{OC~HIGH\};\\
+4~~RULE:~\emph{\textbf{FewMethods}}\{NM~LOW\};\\
+5~\};
+\vspace{-0.2cm}
+\begin{center}
+(b) Tiny Service
+\end{center}
+\vspace{-0.2cm}
+1~RULE\_CARD:~\emph{\textbf{ChattyService}}~\{\\
+2~~RULE:~\emph{\textbf{ChattyService}}\{INTER~\emph{\textbf{ManyPartners}}~\emph{\textbf{ManyMatches}}\};\\
+3~~RULE:~\emph{\textbf{ManyPartners}}\{NDP~VERY HIGH\};\\
+4~~RULE:~\emph{\textbf{ManyMatches}}\{NMA~VERY HIGH\};\\
+5~\};
+\vspace{-0.2cm}
+\begin{center}
+(c) Chatty Service
+\end{center}
+\vspace{-0.2cm}
+1~RULE\_CARD:~\emph{\textbf{BottleNeck}}~\{\\
+2~~RULE:~\emph{\textbf{BottleNeck}}\{INTER~\emph{\textbf{HighOutgoingCoupling}}~\emph{\textbf{HighIncomingCoupling}}\};\\
+3~~RULE:~\emph{\textbf{HighOutgoingCoupling}}\{OC~HIGH\};\\
+4~~RULE:~\emph{\textbf{HighIncomingCoupling}}\{IC~HIGH\};\\
+5~\};
+\vspace{-0.2cm}
+\begin{center}
+(d) BottleNeck Service
+\end{center}
+\vspace{-0.2cm}
+1~RULE\_CARD:~\emph{\textbf{KnotService}}~\{\\
+2~~RULE:~\emph{\textbf{KnotService}}\{INTER~\emph{\textbf{LowCohesion}}~\emph{\textbf{HighCrossInvocation}}\};\\
+3~~RULE:~\emph{\textbf{LowCohesion}}\{COH~LOW\};\\
+4~~RULE:~\emph{\textbf{HighCrossInvocation}}\{CID~HIGH\};\\
+5~\};
+\vspace{-0.2cm}
+\begin{center}
+(e) Knot Service
+\end{center}
+\vspace{-0.2cm}
+1~RULE\_CARD:~\emph{\textbf{ServiceChain}}~\{\\
+2~~RULE:~\emph{\textbf{ServiceChain}}\{\emph{\textbf{HighTransitiveCoupling}}\};\\
+3~~RULE:~\emph{\textbf{HighTransitiveCoupling}}\{TC~HIGH\};\\
+4~\};
+\vspace{-0.2cm}
+\begin{center}
+(f) Service Chain
+\end{center}
+\end{small}
+\vspace{-0.2cm}
+\caption{Rule Cards\label{fig:rules}}
+\end{figure}
+
+%The first metric, named \textbf{\textit{NMA}}
+%(Number of MAtch), follows the number of rules where a service appears,
+%either on the left- or on the right-hand side. \textbf{\textit{NDP}}
+%(Number of different Partners) indicates how many different partners
+%a service has. Spelled differently, the metric determines whether
+%the service communicates intensively with surrounding services or
+%not. The next pair of metrics is in charge of assessing the coupling,
+%or, more precisely, what we call the \textit{incoming coupling} and
+%the \textit{outgoing one}. The basic intuition behind \textbf{\textit{IC}}\textit{(S)}
+%(Incoming coupling) is to count how many times a service is used.
+%Yet instead of merely counting a unit for each partner service, we
+%use a contextual value: $\frac{CID(S,X)}{NDP(S)}$ where $X$ is the
+%partner service. Thus, the larger the portion of the partner service
+%in the overall number of partners of $S$, the higher the coupling.
+%For the outgoing variant of the metric, \textbf{\textit{OC}} (Outgoing
+%coupling), the same principle applies, yet in a dual manner. count
+%how many times the argument service uses other services. Next, \textbf{\textit{NM}} (Number of Methods) counts the number
+%of occurrences of the methods from a service. The counting for this
+%metric focuses on method rules. Finally, our last metric, called \textbf{\textit{COH}} for Cohesion, assesses the ration between the numbers of partner services and of the available methods, respectively. 

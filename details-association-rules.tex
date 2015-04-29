@@ -1,0 +1,67 @@
+
+\subsection*{Mining sequential association rules \label{details-assoc} \protect \\
+}
+
+Association rules are extracted from
+a collection of sequence-shaped transactions 
+with respect to a minimal support and a minimal confidence threshold.
+Recall that the support of a pattern, i.e. sequence of items (services or service methods),
+reflects the overall percentage of transactions that contain the pattern,
+whereas the confidence measures the likelihood of the consequent following
+the occurrence of the antecedent in a transaction.
+\textcolor{red}{\emph{R[3-1]}}For our experiments (see next section) we set the values of
+the thresholds to  40\% and 60\%, respectively. 
+The choice of these values does not follow any
+specific indication, general law from ARM or deeper insight
+into the SBS architecture.
+As our approach is at its exploratory stage,
+we were only guided by the need to filter out all spurious
+associations while still keeping enough rules to represent the
+most significant scenarios (regulated via the support threshold).
+Moreover, we needed enough confidence in the threshold to make appear
+the most significant alternatives (rule consequent) for the termination of
+a specific sequence of calls (rule antecedent) while suppressing the
+less significant ones.
+Thus, we made several tries with different values for both thresholds
+and observed the size of the result. The current values seem to offer the
+best trade-off between size and completeness of scenarios.
+
+% because the generate sequential associations
+%rules are numerous enough to have a large set of data to work on even
+%on short executions logs. Nevertheless, generated association rules
+%are still relevant because of the relatively high confidence. 
+
+%\petko{The following is more of a related work, definitely not at the right place. I wonder why the
+%removal of the example that was here before?}
+To extract the association rules from execution logs,
+two choices were possible. On one hand, sequential pattern mining and rule mining algorithms
+have been designed for structures that are slightly more general than the ones used here.
+In fact, sequential patterns are defined on transactions that represent sequences of sets.
+Efficient sequential pattern miners have been published, e.g. the PrefixSpan method~\cite{pei2004mining}.
+On the other hand, execution logs do not compile to fully-blown sequential transactions as the underlying structures are mere sequences of individual elements. Such data has been known since at least the mid-90s but received less attention by the data mining community, arguably because it is less challenging to mine. In contrast, many practical applications have been reported where such data arise, inclusive software log mining (see Section~\ref{sec:related-work}). In the general data mining literature, mining from pure sequences, as opposed to sequences made of sets, has been addressed under the name of episode mining~\cite{DMKD}. Episodes are made of \textit{events} and in a sense, service calls are events. Arguably the largest body of knowledge on the subject belongs to the web usage mining field: The input data is again a system log, yet this time the log of requests sent to a web server~\cite{pei2000mining}.
+It is noteworthy that sequential patterns are more general than the pure sequence ones, hence mining algorithms designed for the former might prove to be less efficient when applied to the latter (as additional steps might be required for listing all significant set).
+Nevertheless, to jump-start our experimental study, we used a sequential pattern/rule miner that has the advantage to be freely available on the web\footnote{http://www.philippe-fournier-viger.com/spmf/}. Although it has not been optimized for pure sequences its performances are more than satisfactory. However, in a follow up study, we shall be implementing a more advanced method specifically targeting logs (see Section~\ref{sec:Conclusions}).
+
+% similar to ours have been 
+%we use algorithm belonging to the framework proposed by \cite{SPMFrohtua} named SPMF. This algorithm shares many similarities with algorithms dedicated for searching patterns in the access logs from websites~\cite{pei2000mining} and those concerning the search of frequent events in sequences of events~\cite{DMKD}. The first kind of algorithm scan the websites access logs twice. During the first pass, it find the frequent events considering a specified support. In the second pass throughout the data, it construct a data structure named WAP-tree (Web Access Pattern-tree) and finally mine this date structure using conditional search for finding all frequent web access patterns. In the other hand, algorithm for finding frequent events in sequence of events with the goal to find relationship between events. First, they identify which are the sequence of events during a given time frame. Using the same mechanism as the first algorithm, they determine whether or not a sequence is frequent considering the support. The final step is to construct association rules to find relationship between events with a generate-candidate and test approach. 
+
+
+%and \ref{fig:Representation-of-Table}, we can see that services {[}A,
+%B, C, E, F, G{]} are parts of transaction 1; 2; 3 and 4. However,
+%the service G does not appear in sequential associations rules because
+%of its support inferior to 40\% within the overall transactions. Therefore,
+%{[}G{]} probably do not have a major role in this SBS. If we focus
+%on our goal, detecting poor design named SOA antipatterns, we identify
+%a high number of consecutive call in a transitive way. Indeed services
+%{[}A,B,E,F{]} are present in 50\% of all transactions (in this specific
+%order) and if {[}A,B{]} are call then the probability of {[}E,F{]}
+%is 100\%. This heap of services could be considered as a Chain Service.
+%As we describe in the introduction, A seems needs to call several
+%services in a transitive way to fulfill the initial request. In this
+%configuration if {[}F{]} is not available, {[}A\textbf{{]}}{[}B{]}
+%and {[}E{]} will fail one time in two, according to rule 3. Moreover,
+%considering the second table of association rules (on methods), if
+%the service A appears to have a few number of methods then it will
+%be considered as a Tiny Service because it have to directly call several
+%services to complete its own abstraction. Similarly to design patterns,
+%services can be involved in many antipatterns at once. 

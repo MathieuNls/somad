@@ -1,0 +1,2196 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="17" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Metrics
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\emph on
+Number of Matches (NMA
+\begin_inset Formula $_{(s)}$
+\end_inset
+
+)
+\emph default
+ 
+\series default
+: 
+\begin_inset Formula $\#\{X\rightarrow Y\in AR_{s}\mid S\lessdot(X\Cup Y)\}$
+\end_inset
+
+ } 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Follows the number of rules where a service appears, either on the left-
+ or on the right-hand side.
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\emph on
+Number of Diff.
+ Partners (NDP
+\begin_inset Formula $_{(s)}$
+\end_inset
+
+)
+\series default
+\emph default
+ :
+\begin_inset Formula $\#\{K\mid X\rightarrow Y\in AR_{s},S\lessdot X,K\lessdot Y\}$
+\end_inset
+
+ 
+\begin_inset Formula $+\#\{K\mid X\rightarrow Y\in AR_{s},S\lessdot Y,K\lessdot X\}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Indicates how many different partners a service has.
+ Spelled differently, the metric determines whether the service communicates
+ intensively with surrounding services or not.
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\emph on
+Cross Invocation Dependencies (CID(
+\begin_inset Formula $S_{a},S_{b}$
+\end_inset
+
+))
+\series default
+\emph default
+ : 
+\begin_inset Formula $\#\{X\rightarrow Y\in AR_{s}\mid S_{a}\lessdot X,S_{b}\lessdot Y\}$
+\end_inset
+
+ 
+\begin_inset Formula $+\#\{X\rightarrow Y\in AR_{s}\mid S_{a}\lessdot Y,S_{b}\lessdot X\}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Is a paramount for the detection of antipattern manifestations dug into
+ the logs.
+ Indeed, the metric would explore the typical interactions between services
+ while ignoring less frequent ones (absent from the mining method output
+ due to the support threshold).
+ To retrieve this information CID counts all association rules where a service
+ A (Sa) is present in the antecedent and a service B (Sb) in the consequent
+ or vice versa.
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\emph on
+Incoming Coupling (IC
+\begin_inset Formula $_{(s)}$
+\end_inset
+
+) 
+\series default
+\emph default
+: 
+\begin_inset Formula $\sum_{L\in\{K\mid X\rightarrow Y\in AR_{s},K\lessdot X,S\lessdot Y\}}\frac{CID(S,X)}{NDP(S)}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Count how many times a service is used.
+ Yet instead of merely counting a unit for each partner service, we use
+ a contextual value: 
+\begin_inset Formula $\frac{CID(S,X)}{NDP(S)}$
+\end_inset
+
+where X is the partner service.
+ Thus, the larger the portion of the partner service in the overall number
+ of partners of S, the higher the coupling.
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\emph on
+Outgoing Coupling (OC
+\begin_inset Formula $_{(s)}$
+\end_inset
+
+) 
+\series default
+\emph default
+: 
+\begin_inset Formula $\sum_{L\in\{K\mid X\rightarrow Y\in AR_{s},S\lessdot X,K\lessdot Y\}}\frac{CID(X,S)}{NDP(S)}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+The same principle as Incoming coupling applies, yet in a dual manner.
+ Count how many times the argument service uses other services.
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Transitive Coupling (TC
+\begin_inset Formula $(S_{a},S_{b})$
+\end_inset
+
+)
+\series default
+ : 
+\begin_inset Formula $\#\{K\mid X\rightarrow Y\in AR_{s},S_{a}\lessdot X,S_{b}\lessdot Y,({[S_{a},K]\Subset X}\vee[K,S_{b}]\Subset Y)\}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Aim to spot a common antipattern in SOA, the Service Chain (see above).
+ First, observe that the fact that a pair of services does not communicate
+ directly does not mean that they are not coupled: that is the founding
+ idea of Service Chain and of our metric too.
+ To identify transitive coupling manifestations within the extracted association
+ rules, which is more challenging than the direct coupling, we need to capture
+ describing a chain: e.g.
+ a service Sa is in the antecedent of a rule, Sb is in the consequent of
+ another rule and both rules are connected by means of a third service K
+ that appears in the consequent of the first rule and in the antecedent
+ of the second one.
+ Longer chains are possible as well.
+ Thus, in the basic case, we could have [A]→[B] and [B]→[C], with this configura
+tion, A and C are not directly coupled but if C fails, there are good chances
+ that A and B would fail too.
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\emph on
+Number of Method (NM
+\begin_inset Formula $_{(s)}$
+\end_inset
+
+)
+\series default
+\emph default
+ : 
+\begin_inset Formula $\#\{K\mid X\rightarrow Y\in AR_{m},K\in M_{s},K\lessdot(X\Cup Y)\}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Counts the number of occurrences of the methods from a service.
+ The counting for this metric focuses on method rules 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\emph on
+Cohesion (COH
+\begin_inset Formula $_{(s)}$
+\end_inset
+
+) : 
+\series default
+\emph default
+
+\begin_inset Formula $\frac{NDP(S)}{NM(S)}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Assesses the ration between the numbers of partner services and of the available
+ methods, respectively.
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="10" columns="2">
+<features tabularvalignment="middle">
+<column alignment="right" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Number of Matches (NMA(S)) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\#\{X\rightarrow Y\in AR_{s}\mid S\lessdot(X\Cup Y)\}$
+\end_inset
+
+ } 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+multirow
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+2
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+*
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%
+\backslash
+vspace{0.3cm}
+\backslash
+tabularnewline
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+Number of Diff.
+ Partners (NDP(S))
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\#\{K\mid X\rightarrow Y\in AR_{s},S\lessdot X,K\lessdot Y\}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $+\#\{K\mid X\rightarrow Y\in AR_{s},S\lessdot Y,K\lessdot X\}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+multirow
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+2
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+*
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% 
+\backslash
+vspace{0.3cm} 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+Cross Invocation Dependencies (CID(
+\begin_inset Formula $S_{a},S_{b}$
+\end_inset
+
+))
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\#\{X\rightarrow Y\in AR_{s}\mid S_{a}\lessdot X,S_{b}\lessdot Y\}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $+\#\{X\rightarrow Y\in AR_{s}\mid S_{a}\lessdot Y,S_{b}\lessdot X\}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+vspace{0.3cm}
+\backslash
+tabularnewline
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+Incoming Coupling (IC(S)) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sum_{L\in\{K\mid X\rightarrow Y\in AR_{s},K\lessdot X,S\lessdot Y\}}\frac{CID(S,L)}{NDP(S)}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% 
+\backslash
+#
+\backslash
+{K 
+\backslash
+mid X 
+\backslash
+rightarrow Y 
+\backslash
+in AR_{s}, K  
+\backslash
+lessdot X , S  
+\backslash
+lessdot Y
+\backslash
+}*  
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+vspace{0.3cm}
+\backslash
+tabularnewline
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+Outgoing Coupling (OC(S)) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sum_{L\in\{K\mid X\rightarrow Y\in AR_{s},S\lessdot X,K\lessdot Y\}}\frac{CID(L,S)}{NDP(S)}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%$
+\backslash
+#
+\backslash
+{K 
+\backslash
+mid X 
+\backslash
+rightarrow Y 
+\backslash
+in AR_{s}, S  
+\backslash
+lessdot X , K  
+\backslash
+lessdot Y
+\backslash
+}  *  
+\backslash
+frac{NPD(X)}{CIN(X,Y)}
+\backslash
+}$ 
+\backslash
+petko{Fraction CANNOT BE TRUE}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+vspace{0.3cm}
+\backslash
+tabularnewline
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+Transitive Coupling (TC
+\begin_inset Formula $(S_{a},S_{b})$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\#\{K\mid X\rightarrow Y\in AR_{s},S_{a}\lessdot X,S_{b}\lessdot Y,({[S_{a},K]\Subset X}\vee[K,S_{b}]\Subset Y)\}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%K 
+\backslash
+lessdot (X 
+\backslash
+Cup Y), 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+mathieu{If K isn't includes in X nor Y, how can we count it ? The algorithm
+ count all K present between X_{0} and Y_{last}}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+vspace{0.3cm}
+\backslash
+tabularnewline
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+Number of Method (NM(S)) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\#\{K\mid X\rightarrow Y\in AR_{m},K\in M_{s},K\lessdot(X\Cup Y)\}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+mathieu{Does it look correct now ?} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+vspace{0.3cm}
+\backslash
+tabularnewline
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+Cohesion (COH(S)) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{NDP(S)}{NM(S)}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Metrics 
+\color red
+
+\begin_inset Formula $\Cup$
+\end_inset
+
+ : append on sequences; 
+\begin_inset Formula $\Subset$
+\end_inset
+
+ : sub-sequence-of relationship; and A 
+\begin_inset Formula $\lessdot$
+\end_inset
+
+ B : A appears inside B.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "Metric"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+emph{Metric 1
+\backslash
+label{Metric-1--} - Number of Match (NMA)}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+begin{eqnarray*}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%
+\backslash
+sum(S-,-S) & 
+\backslash
+in|AR_{s}|
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+mbox{NMA}(S) & = & 
+\backslash
+#
+\backslash
+{X 
+\backslash
+rightarrow Y 
+\backslash
+in AR_{s}, S  
+\backslash
+biguplus (X 
+\backslash
+cup Y) 
+\backslash
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+end{eqnarray*}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%
+\backslash
+emph{Metric 2 - Number of different partners (NDP)}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+begin{eqnarray*}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%
+\backslash
+sum(S-,
+\backslash
+nexists K) & + & 
+\backslash
+sum(
+\backslash
+nexists K,-S)
+\backslash
+in|AR_{m}|
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+mbox{NDP}(S) & = & 
+\backslash
+#
+\backslash
+{K 
+\backslash
+mid X 
+\backslash
+rightarrow Y 
+\backslash
+in AR_{s}, S  
+\backslash
+biguplus X , K  
+\backslash
+biguplus Y
+\backslash
+} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%& + & 
+\backslash
+#
+\backslash
+{K 
+\backslash
+mid X 
+\backslash
+rightarrow Y 
+\backslash
+in AR_{s}, S  
+\backslash
+biguplus Y , K  
+\backslash
+biguplus X
+\backslash
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+end{eqnarray*}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+emph{Metric 3 - Cross Implies Number(CIN)}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+begin{eqnarray*}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+mbox{CIN}(S_{a},S_{b}) & = & 
+\backslash
+#
+\backslash
+{X 
+\backslash
+rightarrow Y 
+\backslash
+in AR_{s} 
+\backslash
+mid S_{a}  
+\backslash
+biguplus X , S_{b}  
+\backslash
+biguplus Y 
+\backslash
+} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%& + & 
+\backslash
+#
+\backslash
+{X 
+\backslash
+rightarrow Y 
+\backslash
+in AR_{s} 
+\backslash
+mid S_{a}  
+\backslash
+biguplus Y , S_{b}  
+\backslash
+biguplus X 
+\backslash
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%
+\backslash
+sum(S_{a}-,-S_{b}) & + & 
+\backslash
+sum(S_{b}-,-S_{a})
+\backslash
+,
+\backslash
+in|AR_{s}|
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+end{eqnarray*}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+emph{Metric 4 - Incoming Coupling (IC)}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+begin{eqnarray*}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%
+\backslash
+sum(K,-S) & 
+\backslash
+in & |AR_{s}|
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+mbox{IC}(S) & = & 
+\backslash
+#
+\backslash
+{K 
+\backslash
+mid X 
+\backslash
+rightarrow Y 
+\backslash
+in AR_{s}, K  
+\backslash
+biguplus X , S  
+\backslash
+biguplus Y
+\backslash
+} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%& * & 
+\backslash
+{NPD(Y)/CIN(X,Y)
+\backslash
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+end{eqnarray*}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+emph{Metric 5 - Outgoing Coupling (OC)}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+begin{eqnarray*}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%
+\backslash
+sum(S-,K) & 
+\backslash
+in & |AR_{s}|
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+mbox{OC}(S) & = & 
+\backslash
+#
+\backslash
+{K 
+\backslash
+mid X 
+\backslash
+rightarrow Y 
+\backslash
+in AR_{s}, S  
+\backslash
+biguplus X , K  
+\backslash
+biguplus Y
+\backslash
+} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%& * & 
+\backslash
+{NPD(X)/CIN(X,Y)
+\backslash
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+end{eqnarray*}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+emph{Metric 6 - Transitive Coupling (TC)}
+\backslash
+petko{How do we reformat this one?}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+begin{eqnarray*}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%
+\backslash
+sum(S-,K) & 
+\backslash
+in & |AR_{s}|
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+mbox{TC}(S_{a}, S_{b}) & = & 
+\backslash
+#
+\backslash
+{K 
+\backslash
+mid X 
+\backslash
+rightarrow Y 
+\backslash
+in AR_{s}, S_{a}  
+\backslash
+biguplus X , S_{b}  
+\backslash
+biguplus Y 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%& , & K 
+\backslash
+ni X, K 
+\backslash
+ni Y 
+\backslash
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+end{eqnarray*}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+emph{Metric 7 - Number Of Methods (NM)}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+begin{eqnarray*}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%% & 
+\backslash
+sum(M_{s}-,-M_{s}) & 
+\backslash
+in & |AR_{m}|
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+mbox{NM}(S) & = & 
+\backslash
+#
+\backslash
+{K 
+\backslash
+mid X 
+\backslash
+rightarrow Y 
+\backslash
+in AR_{m}, K 
+\backslash
+in M_{s}
+\backslash
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+end{eqnarray*}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+emph{Metric 8 - Cohesion (COH)}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+begin{eqnarray*}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%% & 
+\backslash
+frac{NPD}{NM} & 
+\backslash
+in|AR_{m}|
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+mbox{COH}(S) & = & 
+\backslash
+frac{NPD(S)}{NM(S)}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+end{eqnarray*}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 0.15cm
+\end_inset
+
+ After having presented our antipattern detection tools based on service/method
+ associations and on metrics on top of these, in the next section, we elaborate
+ on their application to real SBSs.
+\end_layout
+
+\end_body
+\end_document

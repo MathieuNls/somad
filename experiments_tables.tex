@@ -1,0 +1,128 @@
+
+\begin{table*}
+\centering{}\centering{}%
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline 
+\multirow{2}{*}{Anti-patrons}  & \multicolumn{2}{c|}{Services détectés}  & Services détectés  & \multirow{2}{*}{Métriques SOMAD}  & \multirow{2}{*}{Rappel}  & \multirow{2}{*}{Précision}  & \multirow{2}{*}{Temps}  & \multirow{2}{*}{F$_{1}$}\tabularnewline
+ & \multicolumn{2}{c|}{automatiquement}  & manuellement  &  &  &  &  & \tabularnewline
+\hline 
+\hline 
+\multirow{2}{*}{Tiny Service} & \multirow{2}{*}{SODA}  & \texttt{Mediator-}  &  & \multirow{2}{*}{OC $\geqslant$ 4 }  & {[}1/1{]}  & {[}1/1{]}  & \multirow{2}{*}{0.194s}  & \multirow{2}{*}{100\%}\tabularnewline
+ &  & \texttt{Delegate}  & \texttt{Mediator-}  &  & 100\%  & 100\%  &  & \tabularnewline
+\cline{2-3} \cline{6-9} 
+\textit{Detected on the}   & \multirow{2}{*}{SOMAD}  & \texttt{Mediator-}  & \texttt{Delegate}  & \multirow{2}{*}{NM $\leqslant$1 }  & {[}1/1{]}  & {[}1/1{]}  & \multirow{2}{*}{0.077s }  & \multirow{2}{*}{100\%}\tabularnewline
+\textit{ Evolved Version} &  & \texttt{Delegate}  &  &  & 100\%  & 100\%  &  & \tabularnewline
+\hline 
+\hline 
+\multirow{4}{*}{Multi Service }  & \multirow{2}{*}{SODA}  & \multirow{2}{*}{\texttt{IMediator} }  & \multirow{4}{*}{\texttt{IMediator} }  & NM $\geqslant$ 2  & {[}1/1{]}  & {[}1/1{]}  & \multirow{2}{*}{0.462s}  & \multirow{2}{*}{100\% }\tabularnewline
+ &  &  &  & NMA $\geqslant$ 3.8  & 100\%  & 100\%  &  & \tabularnewline
+\cline{2-3} \cline{6-9} 
+ & \multirow{2}{*}{SOMAD}  & \multirow{2}{*}{\texttt{IMediator} }  &  & \multirow{2}{*}{COH $\leqslant$ 0.5 }  & {[}1/1{]}  & {[}1/1{]}  & \multirow{2}{*}{0.050s}  & \multirow{2}{*}{100\% }\tabularnewline
+ &  &  &  &  & 100\%  & 100\%  &  & \tabularnewline
+\hline 
+\hline 
+\multirow{4}{*}{Chatty Service}  & \multirow{2}{*}{SODA}  & \texttt{PatientDAO}  & \multirow{2}{*}{\texttt{PatientDAO}}  & \multirow{2}{*}{NMA $\geqslant$ 3.8}  & {[}2/2{]}  & {[}2/2{]}  & \multirow{2}{*}{0.383s}  & \multirow{2}{*}{100\%}\tabularnewline
+ &  & \texttt{IMediator}  &  &  & 100\%  & 100\%  &  & \tabularnewline
+\cline{2-3} \cline{6-9} 
+ & \multirow{2}{*}{SOMAD}  & \texttt{PatientDAO}  & \multirow{2}{*}{\texttt{IMediator}}  & \multirow{2}{*}{NDP $\geqslant$ 0.6 }  & {[}2/2{]}  & {[}2/2{]}  & \multirow{2}{*}{0.077s}  & \multirow{2}{*}{100\%}\tabularnewline
+ &  & \texttt{IMediator}  &  &  & 100\%  & 100\%  &  & \tabularnewline
+\cline{2-3} \cline{6-9} 
+\hline 
+\hline 
+\multirow{4}{*}{The Knot}  & \multirow{2}{*}{SODA}  & \texttt{PatientDAO}  & \multirow{4}{*}{\texttt{PatientDAO}}  & \multirow{2}{*}{CID $\geqslant$ 2 }  & {[}1/1{]}  & {[}1/2{]}  & \multirow{2}{*}{0.412s}  & \multirow{2}{*}{66.6\% }\tabularnewline
+ &  & \texttt{IMediator}  &  &  & 100\%  & 50\%  &  & \tabularnewline
+ \cline{2-2} \cline{6-9}
+ & \multirow{2}{*}{SOMAD}  & \multirow{2}{*}{\texttt{PatientDAO}}  &  & \multirow{2}{*}{COH $\leqslant$ 0.5}  & {[}1/1{]}  & {[}1/1{]}  & \multirow{2}{*}{0.077s}  & \multirow{2}{*}{100\%}\tabularnewline
+ &  &  &  &  & 100\%  & 100\%  &  & \tabularnewline
+ \cline{2-3} \cline{6-9} 
+\hline 
+\hline 
+\multirow{5}{*}{BottleNeck}  & \multirow{2}{*}{SODA}  & \texttt{IMediator}  & \multirow{2}{*}{\texttt{IMediator}}  & \multirow{2}{*}{IC $\geqslant$ 4 }  & {[}2/2{]}  & {[}2/2{]}  & \multirow{2}{*}{0.246s}  & \multirow{2}{*}{100\%}\tabularnewline
+ &  & \texttt{PatientDAO}  &  &  & 100\%  & 100\%  &  & \tabularnewline
+ \cline{2-3} \cline{6-9} 
+ & \multirow{3}{*}{SOMAD}  & \texttt{IMediator}  & \multirow{3}{*}{\texttt{PatientDAO}}  & \multirow{3}{*}{OC $\geqslant$ 3 }  & \multirow{2}{*}{{[}2/2{]} }  & \multirow{2}{*}{{[}2/2{]} }  & \multirow{3}{*}{0.076s }  & \multirow{3}{*}{100\% }\tabularnewline
+ &  & \texttt{PatientDAO}  &  &  &  &  &  & \tabularnewline
+ &  & \texttt{\sout{SunSpotService}}  &  &  & 100\%  & 100\%  &  & \tabularnewline
+\hline 
+\hline 
+\multirow{8}{*}{Chain Service}  & \multirow{4}{*}{SODA}  & \texttt{\{IMediator,}  & \multirow{2}{*}{}  & \multirow{8}{*}{LC $\geqslant$ 4 }  &  &  & \multirow{4}{*}{0.229s}  & \multirow{4}{*}{85.7\%}\tabularnewline
+ &  & \texttt{PatientDAO,}  &  &  & {[}3/3{]}  & {[}3/4{]}  &  & \tabularnewline
+ &  & \texttt{SunSpotService,}  & \texttt{\{IMediator,}  &  & 100\%  & 75\%  &  & \tabularnewline
+ &  & \texttt{PatientDAO2}\}  & \texttt{PatientDAO,}  &  &  &  &  & \tabularnewline
+ \cline{2-3} \cline{6-9} 
+
+ & \multirow{4}{*}{SOMAD}  & \texttt{\{IMediator,}  & \texttt{PatientDAO2\}}  &  &  &  & \multirow{4}{*}{0.056s }  & \multirow{4}{*}{85.7\%}\tabularnewline
+ &  & \texttt{PatientDAO,}  & \multirow{3}{*}{}  &  & {[}3/3{]}  & {[}3/4{]}  &  & \tabularnewline
+ &  & \texttt{SunSpotService,}  &  &  & 100\%  & 75\%  &  & \tabularnewline
+ &  & \texttt{PatientDAO2\}}  &  &  &  &  &  & \tabularnewline
+\hline 
+\hline 
+\multirow{2}{*}{Moyennes}  & SODA  & \multicolumn{1}{c}{} & \multicolumn{2}{c|}{} & 100\%  & 87.5\%  & 0.231s  & 92.0\%\tabularnewline
+\cline{2-2} \cline{6-9} 
+ & SOMAD  & \multicolumn{1}{c}{} & \multicolumn{2}{c|}{} & 100\%  & 95.8\%  & 0.068s  & 97.6\%\tabularnewline
+\hline 
+\end{tabular}\vspace{-0.3cm}
+\end{table*}
+
+
+\begin{table*}
+\centering{}\centering{}%
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline 
+\multirow{2}{*}{Anti-patrons} & \multicolumn{2}{c|}{Services détectés} & Services détectés & Métriques & \multirow{2}{*}{Rappel} & \multirow{2}{*}{Précision } & \multirow{2}{*}{Temps} & \multirow{2}{*}{F$_{1}$}\tabularnewline
+ & \multicolumn{2}{c|}{automatiquement}  & manuellement  & SOMAD & & & & \tabularnewline
+\hline 
+\hline 
+\multirow{4}{*}{Tiny Service}  & \multirow{2}{*}{SODA}  & \multirow{2}{*}{\texttt{SCA-Parser}} & \multirow{4}{*}{\texttt{SCA-Parser} } & \multirow{2}{*}{OC $\geqslant$ 3 }  & {[}1/1{]}  & {[}1/1{]}  & \multirow{2}{*}{0.083s}  & \multirow{2}{*}{100\%}\tabularnewline
+ &  &  &  &  & 100\%  & 100\%  &  & \tabularnewline
+\cline{2-3} \cline{6-9} 
+ & \multirow{2}{*}{SOMAD}  & \multirow{2}{*}{\texttt{SCA-Parser}} &  & \multirow{2}{*}{NM $\leqslant$1 }  & {[}1/1{]}  & {[}1/1{]}  & \multirow{2}{*}{0.066 }  & \multirow{2}{*}{100\%}\tabularnewline
+ &  &  &  &  & 100\%  & 100\%  &  & \tabularnewline
+\hline 
+\hline 
+\multirow{4}{*}{Multi Service }  & \multirow{2}{*}{SODA}  & \texttt{juliac} & \multirow{4}{*}{\texttt{Explorer-GUI}} & NDP $\geqslant$ 24 & {[}1/1{]}  & {[}1/2{]}  & \multirow{2}{*}{0.462s}  & \multirow{2}{*}{66.67\% }\tabularnewline
+ &  & \texttt{Explorer-GUI} &  & NMA $\geqslant$ 70 & 100\%  & 50\%  &  & \tabularnewline
+\cline{2-3} \cline{6-9} 
+ & \multirow{2}{*}{SOMAD}  & \multirow{2}{*}{\texttt{Explorer-GUI}} &  & \multirow{2}{*}{COH $\leqslant$ 0.5 }  & {[}1/1{]}  & {[}1/1{]}  & \multirow{2}{*}{0.050s}  & \multirow{2}{*}{100\% }\tabularnewline
+ &  &  &  &  & 100\%  & 100\%  &  & \tabularnewline
+\hline 
+\hline 
+\multirow{4}{*}{Chatty Service}  & \multirow{2}{*}{SODA}  & \multirow{2}{*}{\texttt{\emph{not present}}} & \multirow{4}{*}{\texttt{\emph{not present}}} & \multirow{2}{*}{NMA $\geqslant$ 70}  & {[}0/0{]}  & {[}0/0{]}  & \multirow{2}{*}{0.97s}  & \multirow{2}{*}{N.A}\tabularnewline
+ &  &  &  &  & N.A  & N.A  &  & \tabularnewline
+\cline{2-3} \cline{6-9} 
+ & \multirow{2}{*}{SOMAD}  & \multirow{2}{*}{\texttt{\emph{not present}}} &  & \multirow{2}{*}{NDP $\geqslant$ 24 }  & {[}0/0{]}  & {[}0/0{]}  & \multirow{2}{*}{0.77s}  & \multirow{2}{*}{N.A}\tabularnewline
+ &  &  &  &  & N.A  & N.A  &  & \tabularnewline
+\hline 
+\hline 
+\multirow{4}{*}{The Knot}  & \multirow{2}{*}{SODA}  & \multicolumn{1}{c|}{\texttt{SCA-Parser}} & \multirow{4}{*}{\texttt{SCA-Parser}}  & \multirow{2}{*}{CID $\geqslant$ 25 }  & {[}1/1{]}  & {[}1/2{]}  & \multirow{2}{*}{1.041s}  & \multirow{2}{*}{66.6\% }\tabularnewline
+ &  & \texttt{SCA-Composite} &  &  & 100\%  & 50\%  &  & \tabularnewline
+\cline{2-3} \cline{6-9} 
+\multirow{1}{*}{} & \multirow{2}{*}{SOMAD}  & \multirow{2}{*}{\texttt{SCA-Parser}} &  & \multirow{2}{*}{COH $\leqslant$ 0.2}  & {[}1/1{]}  & {[}1/1{]}  & \multirow{2}{*}{0.7s}  & \multirow{2}{*}{100\%}\tabularnewline
+ &  &  &  &  & 100\%  & 100\%  &  & \tabularnewline
+\hline 
+\hline 
+\multirow{5}{*}{BottleNeck }  & \multirow{2}{*}{SODA}  & \texttt{SCA-Composite}  & \multirow{2}{*}{\texttt{SCA-Parser} } & \multirow{2}{*}{IC $\geqslant$ 3 }  & {[}2/2{]}  & {[}2/2{]}  & \multirow{2}{*}{0.246s}  & \multirow{2}{*}{100\%}\tabularnewline
+ &  & \texttt{SCA-Parser}  &  &  & 100\%  & 100\%  &  & \tabularnewline
+\cline{2-3} \cline{6-9} 
+ & \multirow{3}{*}{SOMAD}  & \texttt{SCA-Parser} & \multirow{3}{*}{\texttt{SCA-Composite} } & \multirow{3}{*}{OC $\geqslant$ 3 }  & {[}2/2{]} & {[}2/3{]} & \multirow{3}{*}{0.076s }  & \multirow{3}{*}{80\% }\tabularnewline
+ &  & \texttt{SCA-Composite}  &  &  & \multirow{2}{*}{100\%} & \multirow{2}{*}{66.67\%} &  & \tabularnewline
+ &  & \texttt{Metamdl-Provider} &  &  &  &  &  & \tabularnewline
+\hline 
+\hline 
+\multirow{8}{*}{Chain Service}  & \multirow{4}{*}{SODA}  & \multirow{2}{*}{\texttt{SCA-Parser} } & \multirow{3}{*}{}  & \multirow{8}{*}{LC $\geqslant$ 5 }  &  &  & \multirow{4}{*}{0.758}  & \multirow{4}{*}{80\%}\tabularnewline
+ &  &  &  &  & {[}2/2{]}  & {[}2/3{]}  &  & \tabularnewline
+ &  & \texttt{Composite-Mngr}  &  &  & 100\%  & 66.67\%  &  & \tabularnewline
+ &  & \texttt{Processor}  & \texttt{Composite Parser} &  &  &  &  & \tabularnewline
+\cline{2-3} \cline{6-9} 
+ & \multirow{4}{*}{SOMAD}  & \multirow{2}{*}{\texttt{Composite-Parser}} & \texttt{Composite-Mngr} &  &  &  & \multirow{4}{*}{0.056s }  & \multirow{4}{*}{100\%}\tabularnewline
+ &  &  & \multirow{3}{*}{}  &  & {[}2/2{]}  & {[}2/2{]}  &  & \tabularnewline
+ &  & \texttt{Composite-Mngr} &  &  & 100\%  & 100\%  &  & \tabularnewline
+\hline 
+\hline 
+\multirow{2}{*}{Moyennes}  & SODA  & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multirow{2}{*}{} & 100\%  & 73.33\%  & 0.707s  & 84.62\%\tabularnewline
+\cline{2-2} \cline{6-9} 
+ & SOMAD & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} &  & 100\%  & 93.33\%  & 0.28s  & 96.55\%\tabularnewline
+\hline 
+\end{tabular}\vspace{-0.3cm}
+\end{table*}
+

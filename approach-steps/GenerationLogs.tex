@@ -1,0 +1,42 @@
+\noindent \emph{Generation of Execution Traces.} In case execution traces are not available, this step allows their generation.
+\vspace{.15cm}
+\\
+\noindent If the target SBS does not produce qualitative execution traces that contain all the required information, we have to instrument it. \rv{3-2} \red{Thus, SOMAD requires either the its source code or the execution environment.}
+%Log files are composed of line that refer to a unique point in the target SBS. For example, a log file containing every method call requires to log statement--two lines--one when entering and one when exiting the methods. 
+In fact, such traces enable low-tech application debugging support whenever
+debuggers are unavailable or inapplicable (frequently the case with
+SOA environments). Therefore, even if 
+trace producing can introduce source code obfuscation, it may nevertheless have some secondary benefits
+e.g. in terms of design quality as the code must be well mastered in order to correctly instrument.
+%logs
+%can reduce the understandability of source code while they add many lines
+%but in the other hand, these extra statements constrain developer
+%to really understand processes they are building, and doubtlessly avoid bad design
+%during the development stage.
+This technique of tracing is the most common. If the source code is unavailable an alternative consists in instrumenting the running environment of the SBS, i.e.  the virtual machine, the web server, or the operating system. For example, LTTng \cite{Fournier2009} instruments Linux to produce traces with a very low overhead.
+
+%Performance issues can also enter
+%into consideration. Indeed printing these thousands of statement
+%into log files is resources consuming. Therefore, we made our logging
+%system capable of deactivating in a way inspired by Apache
+%configuration files.
+
+To ease automated processing of traces, we provide a template (see Figure \ref{fig:Logs-shape}) that is a good trade-off between simplicity and information content. In this template, a method invocation generates two lines, an opening and a closing one with belonging customer identification (IP address) and a timestamp.
+
+%SBSs often contain built-in tracing systems, however, these built-in mechanisms can be very distant from our template. Thus, we made SOMAD adaptable by a simple--regular expression based--domain specific language (Figure \ref{fig:Logs-shape}). Consequently, traces can be organized in various orders.
+
+\begin{figure}[h]
+\framebox{\begin{minipage}[t]{1\columnwidth -0.4cm}%
+IP timestamp void methodA.ServiceA();\\
+	~~~~	IP~~~~timestamp void methodB.ServiceB();\\
+	~~~~IP~~~~timestamp end void methodB.ServiceB();\\
+IP timestamp end void methodA.ServiceA();
+%\\
+%time\{\textasciicircum\textbackslash w+\textbackslash s\textbackslash d\textbackslash d\textbackslash s\textbackslash :\textbackslash d\textbackslash d:\textbackslash d\textbackslash d.\textbackslash d+\} || end\{end\}\\
+%method\{\textasciicircum[\textasciicircum.]*.(.*)\$\} ||
+%service\{\$[\textasciicircum.]*.(*.)\}\\
+%customer\{\textbackslash b\textbackslash d\{1,3\}\textbackslash .\textbackslash d\{1,3\}\textbackslash .\textbackslash d\{1,3\}\textbackslash .\textbackslash d\{1, 3\}\textbackslash b\}\\
+%line\{ *customer *time *(end)? *method.service *\}
+\end{minipage}}
+\caption{Trace template\label{fig:Logs-shape}}
+\end{figure}

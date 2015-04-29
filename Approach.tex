@@ -1,0 +1,40 @@
+
+\section{The SOMAD Approach \label{sec:Methodology}}
+
+
+
+We propose a five step approach, named SOMAD (Service Oriented Mining for Antipatterns Detection), for the detection of SOA antipatterns within execution traces of SBSs. This new approach is a variant of SODA based on execution traces, which may come from any kind of SBSs. 
+In contrast, SODA applies specifically on SCA SBSs using a set of scenarios and SCA-based techniques. In particular, in SOMAD, we specify a new set of metrics that apply to sequential association rules mined on execution traces whereas, in SODA, metrics apply to the concrete invocation of SBSs' interfaces using a set of scenarios. 
+%As a result, the detection of SOA antipatterns with SOMAD is non-intrusive and technology agnostic because it only requires execution traces.
+Figure \ref{fig:The-SODA-approach} shows an overview of SOMAD. We emphasized in grey the two new steps specific to SOMAD and added to the SODA approach. \textit{Step~1. Metric Inference} is supported by the creation of a set of hypotheses made from the textual description of SOA antipatterns. The hypotheses underlie the definition of new  metrics to support the interpretation of association rules. \textit{Step~4. Association Rule Mining} (ARM) discovers interesting sequential associations in execution traces of the targeted SBS. \rv{2-2} Output sequential association rules represent \red{statistically} interesting relations between services inside traces. In what follows, we first introduce key concepts of sequential ARM and then, present the overall process of SOMAD. Finally, we provide some implementation details.
+
+\input{approach-steps/introductionARM.tex}
+
+
+\subsection{SOMAD Process}
+
+
+\input{approach-steps/hypothesis-metrics.tex}
+
+\input{approach-steps/rulecards.tex}
+
+\input{approach-steps/generate.tex}
+
+\input{approach-steps/Mining.tex}
+
+\input{approach-steps/detect.tex}
+
+\subsection{Implementation Details\label{details}}
+
+\noindent In this subsection, we present implementation details for other steps that may support the SOMAD approach. 
+
+\vspace{.15cm}
+\input{approach-steps/GenerationLogs.tex}
+\vspace{.15cm}
+\input{approach-steps/CollectingAggregatingTraces.tex}
+%\vspace{.15cm}
+%\input{approach-steps/TransactionIdentification.tex}
+
+
+\vspace{.15cm}
+\input{approach-steps/focusShift.tex}

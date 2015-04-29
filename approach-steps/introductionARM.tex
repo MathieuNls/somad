@@ -1,0 +1,26 @@
+\subsection{Introduction to Sequential Association Rule Mining}
+
+\noindent In the data mining field, ARM is a
+well-established method for discovering co-occurrences between attributes
+in the objects of a large data set~\cite{piatetsky1991discovery}. Plain
+associations have the form $X \rightarrow Y$, where $X$ and $Y$,
+called the \textit{antecedent} and the \textit{consequent}, respectively, are sets of descriptors
+(purchases by a customer, network alarms, or any other general kind of events).
+Even though plain association rules could serve some relevant information, we are interested here in
+the sequences of service invocations.
+We therefore adopt a variant called sequential association rules in which
+both $X$ and $Y$ become sequences of descriptors.
+Moreover, our sequences follow a temporal order with the antecedent preceding the consequent. 
+Rules of this type mined from traces reveal crucial
+information about the likelihood that services appear together in an execution
+trace and, more importantly, in a specific order. 
+For instance, a strong rule \emph{ServiceA $,$ ServiceB } implies \emph{ServiceC} would mean that after executing A and then B, there are good chances to see C in the trace.
+The conciseness of this example should not confuse the reader as in practical cases
+the sequences appearing in a rule can be of an arbitrary length.
+Furthermore, the strength of the rule is measured by the \textit{confidence} metric: In probabilistic terms,
+it measures the conditional probability of C appearing down the line.
+Beside that, the significance of a rule, i.e. how many times it appears in the data,
+is provided by its \textit{support} measure.
+To ensure only rules of potentially high interestingness are mined,
+the mining task is tuned by minimal thresholds to
+output only the sufficiently high scores for both metrics.

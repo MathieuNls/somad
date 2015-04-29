@@ -1,0 +1,31 @@
+
+\section{Introduction}
+
+Service Based Systems (SBSs) are composed of ready-made services that are accessed through the Internet~\cite{erl2006service}. Services
+are autonomous, interoperable, and reusable software units that can be implemented
+using a wide range of technologies like Web Services, REST (REpresentational
+State Transfer), or SCA (Service Component Architecture, on the top of SOA.). Most of
+the world's biggest computational platforms: Amazon, Paypal, and eBay, for example, represent large-scale SBSs. Such systems are complex--they may generate massive flows of
+communication between services--and highly dynamic: services appear, disappear or get modified.
+The constant evolution in an SBS can easily deteriorate the
+overall architecture of the system and thus bad design choices, known as SOA \textit{antipatterns}~\cite{Moha12-ICSOC-SOASpecificationDetection}, may appear.
+An antipattern is the opposite of a design pattern: while
+patterns should be followed to create more maintainable and reusable
+systems~\cite{wolfgang1994design}, antipatterns must be avoided
+since they have a negative impact, e.g., hinder the maintenance and reusability of SBSs.
+
+Given their negative impact, there is a clear and urgent need for techniques and tools to detect SOA antipatterns. Recently, a tool was developed by our team, called SODA (Service Oriented Detection for Antipatterns)~\cite{Moha12-ICSOC-SOASpecificationDetection,Nayrolles12-ICSOC-SODA}, which targets SOA antipatterns. The tool employs a Domain Specific Language (DSL) to specify SOA antipatterns, which is based on metrics and generates detection algorithms from antipattern specifications in an automated way.
+
+Albeit efficient and precise, SODA suffers from serious limitations. Indeed, the tool performs two phases of analysis, first, a static one and then a dynamic one. The static analysis requires access to service interfaces. Consequently, SODA cannot analyze systems that are proprietary or not open-source. The dynamic analysis requires the execution of the system and therefore, the creation of runnable scenarios. Moreover, since SODA 
+specifically targets systems implementing the SCA standard, its precision drops as the target system gets bigger. 
+%
+Given these limitations, there is a space for improvement, both in precision and in coverage, i.e., detection of antipatterns in SBSs implementing a wider range of SOA technologies.
+%
+In this article, we propose a new and innovative approach for the detection of SOA antipatterns named SOMAD (Service Oriented Mining for Antipattern Detection). SOMAD does not require scenarios to concretely invoke service interfaces as it only relies on execution traces (provided by any SOA technology). It discards irrelevant data by using data mining techniques--sequential association rules mining--. The tool discovers SOA antipatterns by first extracting associations between services as expressed in the execution traces of an SBS. To that end, it applies a specific variant of the association rule mining task based on sequences or episodes: In our case the sequences represent service or, alternatively, method calls. Further on, generated association rules are filtered using a suite of dedicated metrics.
+
+We applied SOMAD on two different SBS called \emph{Home Automation} and \emph{FraSCAti}~\cite{SPE:SPE1077}. \emph{Home Automation} is made of 13 services and \emph{FraSCAti} is almost ten times larger. We compared the outcome of SOMAD to the one produced by SODA, the so far unique tool for SOA antipatterns detection from the literature. Both tools were evaluated in terms of precision and recall, on one hand, and efficiency, on the other hand.  The study results indicate that SOMAD significantly outperforms SODA in term of precision (2.6\% to 16.67\%) and efficiency (2.5+ times faster).
+
+The main contribution of this paper is thus twofold: (i) a new approach for the detection of SOA antipatterns based on association rules mining from the execution traces of an SBS (from a variety of SOA technologies); (ii) an empirical validation of this approach, which shows the tool outperforms its direct competitor in terms of precision and efficiency. 
+
+The remainder of the article is organized as follows. Section~\ref{sec:related-work} presents related works on pattern and antipattern detection both in SOA and OO paradigms and related works on knowledge extraction. Section~\ref{sec:Methodology}
+presents the SOMAD approach, and in particular the mining of association rules from execution traces while, Section~\ref{sec:Experimentation} presents our experimental study with a comparison of our SOMAD approach to SODA. Finally, we provide some concluding remarks in Section~\ref{sec:Conclusions}.

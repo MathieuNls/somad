@@ -1,0 +1,31 @@
+\noindent \emph{\\Step 4. Association Rule Mining:} Execution traces are analyzed to extract the sequential association rules.
+\vspace{0.15cm}
+\\
+\noindent Association rules are extracted from
+a collection of sequence-shaped transactions 
+with respect to a minimal support and a minimal confidence threshold.  A transaction is a time-ordered set of different services and method calls. 
+Recall that the support of a pattern, i.e. sequence of items (services or service methods),
+reflects the overall percentage of transactions that contain the pattern,
+whereas the confidence measures the likelihood of the consequent following
+the occurrence of the antecedent in a transaction.
+For our experiments (see next section) we set the values of
+the thresholds to  40\% and 60\%, respectively.
+The choice of these values does not follow any
+specific indication, general law from ARM or deeper insight
+into the SBS architecture.
+As our approach is at its exploratory stage,
+we were only guided by the need to filter out all spurious
+associations while still keeping enough rules to represent the
+most significant calls (regulated via the support threshold).
+Moreover, we needed enough confidence in the threshold to make appear
+the most significant alternatives (rule consequent) for the termination of
+a specific sequence of calls (rule antecedent) while suppressing the
+less significant ones.  \rv{2-4}
+\red{Thus, we have made several incremental attempts, starting from 10\% and 40\% respectively for the support and the confidence. For each attempt, we modified one of the two values by 5\% and observed the number of generated rules.} The current values seem to offer the best trade-off between size and completeness of scenarios. Now we faced a two-fold possibility for the effective ARM method
+to use on our traces. In fact, most sequential pattern mining and ARM algorithms
+have been designed for structures that are slightly more general than ours, i.e.
+involving sequences of \textit{sets} (instead of single items).
+Efficient sequential pattern/rule miners have been published, e.g. the PrefixSpan method~\cite{pei2004mining}.
+In contrast, execution traces do not compile to fully-blown sequential transactions as the underlying structures are mere sequences of singletons, a data format known for at least 15 years yet rarely exploited by the data mining community, arguably because it is less challenging to mine. However, many practical applications have been reported where such data arise, inclusive software log mining (see Section~\ref{sec:related-work}). In the general data mining literature, mining from pure sequences, as opposed to sequences made of sets, has been addressed under the name of episode mining~\cite{DMKD}. Episodes are made of \textit{events} and in a sense, service calls are events. Arguably the largest body of knowledge on the subject belongs to the web usage mining field: The input data is again a system trace, yet this time the trace of requests sent to a web server~\cite{pei2000mining}.
+Since sequential patterns are more general than the pure sequence ones, mining algorithms designed for the former might prove to be less efficient when applied to the latter (as additional steps might be required for listing all significant sets).
+\rv{1-2} \red{Nevertheless, to jump-start our experimental study and given the specificity of our datasets, we choose the RuleGrowth algorithm \cite{fournier2011rulegrowth} that seemed to fit at best}. Although it has not been optimized for pure sequences its performances are more than satisfactory. In summary, at the end of this, we have extracted the \red{statistically} relevant relationship between services in the form of sequential association rules.

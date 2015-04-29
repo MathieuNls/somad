@@ -1,0 +1,106 @@
+\noindent \emph{Step 1. Metrics Inference:} Metrics to support the interpretation of sequential association rules are inferred from a set of three hypotheses synthesized from the textual description of SOA antipatterns (Table~\ref{tab:List-of-SOA}).
+\vspace{0.15cm}
+\\
+\noindent These hypotheses represent heuristics that enable the identification of \red{architectural} properties relevant to SOA antipatterns. Indeed, after a careful examination of the textual descriptions, we observed that SOA antipatterns can be specified in terms of coupling and cohesion\footnote{Recall coupling basically refers to the degree a services relies on others while cohesion measures the relatedness between its own responsibilities~\cite{stevens1974structured}.}.
+
+%\noindent \textcolor{blue}{In order to infer new metrics able to identify SOA antipatterns properties highlighted from their textual description in ; we need hypotheses helping us to match these properties against the encoded sequential association rules information. These hypothesis work as a kind of heuristic to interpret sequential association rules in order to identify properties relevant to SOA antipatterns. After a careful examination of antipattern textual description, we observe that many of them reflect a high degree of coupling to other services\footnote{The
+%coupling basically refers to the degree a services relies on others~\cite{stevens1974structured}.}.
+%We therefore conclude that such antipatterns can be defined, at least partially,
+%in terms of incoming and outgoing coupling.}
+
+
+
+%\noindent To accomplish the detection of antipatterns given in Table~\ref{tab:List-of-SOA} ) we have to decode the sequential association rules information. As described before, a sequential association rule indicates how likely
+%is a set of services to be called together in the specific order defined by the rule\footnote{In fact,
+%how likely a sequence of services/methods (the rule consequent) is to occur after observing another sequence (the antecedent).}.
+%To detect SOA antipatterns within sequential association rules we need to make hypotheses; the key idea behind them is to identify SOA antipatterns properties, such as cohesion or coupling, while analysing sequential association rules rather than service interfaces. 
+
+
+
+% in this non-common allegory. Newly created hypothesis are then used to infer metrics able to measure SOA antipatterns properties, for example the cohesion, coupling and number of methods inside the sequential association rules.
+
+\begin{table}
+\caption{List of SOA Antipatterns \cite{Moha12-ICSOC-SOASpecificationDetection} \label{tab:List-of-SOA}}
+\begin{tabular*}{8.7cm}{@{\extracolsep{\fill}}p{8.7cm}}
+\tabularnewline
+\textbf{Multi-Service}, \textit{a.k.a} God Object corresponds to a service
+that implements a \textbf{multitude of methods} related to different
+business and technical abstractions. This aggregate too much into
+a single service, such a service is not easily reusable because of
+the \textbf{low cohesion} of its methods and is often unavailable
+to end-users because of its overload, which may induce a high response
+time \cite{Dudney03-J2EEAntipatterns}.\tabularnewline
+\noalign{\vskip0.15cm}
+\textbf{Tiny Service} is a small service with\textbf{ few methods}, which only
+implements part of an abstraction. Such service often requires \textbf{several
+coupled services} to be used together, resulting in higher development
+complexity and reduced usability. In the extreme case, a Tiny Service
+will be limited to \textbf{one method}, resulting in many services
+that implement an overall set of requirements \cite{Dudney03-J2EEAntipatterns}.\tabularnewline
+\noalign{\vskip0.15cm}
+\textbf{Chatty Service} corresponds to a set of services that exchange a \textbf{lot
+of small data} of primitive types. The Chatty Service is also characterized
+by a\textbf{ high number of method invocations}. Chatty Service chats
+a lot with each other \cite{Dudney03-J2EEAntipatterns}.\tabularnewline
+\noalign{\vskip0.15cm}
+\textbf{The Knot} is a \textbf{set of very} \textbf{low cohesive} services,
+which are tightly coupled. These services are thus less reusable.
+Due to this complex architecture, the availability of these services
+can be low, and their response time high \cite{ArnonSOARotem11-SOAPatterns}.\tabularnewline
+\noalign{\vskip0.15cm}
+\textbf{Bottleneck Service} is a service that is \textbf{highly used} by other
+services or clients. It has a \textbf{high incoming and outgoing coupling}.
+Its response time can be higher because it may be used by too many external
+clients, for which clients may need to wait to get access to the service.
+Moreover, its availability may also be low due to the traffic.\tabularnewline
+\noalign{\vskip0.15cm}
+\textbf{Service Chain}, a.k.a. Message Chain in OO systems, corresponds
+to a \textbf{chain of services}. The Service Chain appears when clients
+request \textbf{consecutive service invocations} to fulfill their
+goals. This kind of \textbf{dependency chain} reflects the action
+of invocation in a transitive manner.
+\tabularnewline
+\end{tabular*}\end{table}
+
+\begin{conjecture}
+If a service A \emph{implies} a service B with a high support and a high confidence, then
+A and B are tightly coupled.
+\end{conjecture}
+
+\begin{conjecture}
+If a service appears in the consequent (antecedent) parts for a high number of associations,
+then it has high incoming (outgoing) coupling.
+\end{conjecture}
+
+\noindent The above hypotheses qualify the coupling between two specific
+services and overall incoming/outgoing coupling. The cohesion is also widely used in
+SOA antipattern descriptions. 
+%\begin{conjecture}
+%\sout{If the number
+%of different methods of a given service is
+%similar to the number of different partners (Hypothesis 2) it has
+%in the service rules,
+%then the service is not cohesive.}
+%\end{conjecture}
+\begin{conjecture}
+\rv{1-1} \rv{2-3} \rv{3-1} \red{If the number
+of different methods of a service A is
+equal or superior to the number of different services invoking A (Hypothesis 2) 
+then, the service is not externally cohesive.}
+\end{conjecture}
+
+\noindent \red{This definition of cohesion has been introduced by Perepletchikov \textit{et al.}: "\textit{A service is deemed to be Externally cohesive when all of its service operations are invoked by all the clients of this service}" \cite{Perepletchikov2010}}. Based on the above three hypotheses, we have created domain specific metrics
+to help us explore the antipattern manifestations that are hidden in the sequential association rules. We use the DSL we defined in~\cite{Moha12-ICSOC-SOASpecificationDetection} to combine them. Metrics are presented in Table~\ref{tab:metrics}. In the
+figure, standard mathematical notations are used whenever possible
+and extended if necessary. Thus, association rules are visualized
+by (X $\rightarrow$ Y) with X and Y represent the antecedent and
+the consequent parts, respectively. \emph{K, L} are partner services.
+$AR$ stands for the overall set of association rules while $AR_{s}$
+and $AR_{m}$ being subsets targeting association rules at service / method level, respectively. \emph{$M_{S}$}
+denotes the methods of a given service $S$. Finally, we use non-standard
+symbols for sequence operations: $[ ]$ is the sequence constructor,
+$\Cup$ stand for append on sequences; $\Subset$ denotes the sub-sequence-of
+relationship; and A $\lessdot$ B means the service/method A appears
+inside \red{the association rule B}. Metrics can be combined to define other metrics.
+
+\input{approach-steps/table-metrics.tex}

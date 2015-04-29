@@ -1,0 +1,58 @@
+\begin{table*}
+\caption{Metrics $\Cup$ : append on sequences; $\Subset$ : sub-sequence-of relationship; and A $\lessdot$ B : A appears inside B.\label{tab:metrics}}
+{\renewcommand{\arraystretch}{1.5}}
+\begin{tabular}{|>{\normalsize}p{2\columnwidth}|}
+\hline
+\textbf{\textit{Number of Matches (NMA(S))}} : $\#\{X\rightarrow Y\in AR_{s}\mid S\lessdot(X\Cup Y)\}$ \\ 
+Follows the number of rules where a service appears, either on the left- or on the right-hand side. \\ \hline \hline
+\textbf{\textit{Number of Diff. Partners (NDP(S))}} : $\#\{K\mid X\rightarrow Y\in AR_{s},S\lessdot X,K\lessdot Y\}$
+  $+~\#\{K\mid X\rightarrow Y\in AR_{s},S\lessdot Y,K\lessdot X\}$ \\ 
+Indicates how many different partners a service
+has. Spelled differently, the metric determines whether the
+service communicates intensively with surrounding services
+or not. \\ \hline \hline
+\textbf{\textit{Number of Methods (NM(S))}} : $\#\{K\mid X\rightarrow Y\in AR_{m},K\in M_{s},K\lessdot(X\Cup Y)\}$ \\ 
+Counts
+the number of occurrences of the methods from a service.
+The counting for this metric focuses on method rules.
+ \\ \hline \hline 
+\textbf{\textit{Cohesion (COH(S))}} : $\frac{NDP(S)}{NM(S)}$ \\ 
+Assesses the ratio
+between the numbers of partner services and of the available
+methods, respectively. \\ \hline \hline
+\textbf{\textit{Cross Invocation Dependencies (CID($S_{a},S_{b}$))}} : $\#\{X\rightarrow Y\in AR_{s}\mid S_{a}\lessdot X,S_{b}\lessdot Y\}$ $+~ \#\{X\rightarrow Y\in AR_{s}\mid S_{a}\lessdot Y,S_{b}\lessdot X\}$  \\ 
+\red{CID is a keystone of the SOMAD approach}. Indeed, the metric would explore the typical
+interactions between services while ignoring less frequent
+ones (absent from the mining method output due to the
+support threshold). To retrieve this information CID counts
+all association rules where a service A (Sa) is present in
+the antecedent and a service B (Sb) in the consequent or
+\textit{vice versa}. \\ \hline \hline
+\textbf{\textit{Incoming Coupling (IC(S))}} : $\sum_{L\in\{K\mid X\rightarrow Y\in AR_{s},K\lessdot X,S\lessdot Y\}}\frac{CID(S,L)}{NDP(S)}$ \\ 
+Counts how many times a service is used.
+Yet instead of merely counting a unit for each partner service, we
+use a contextual value: $\frac{CID(S,X)}{NDP(S)}$ where $X$ is the
+partner service. Thus, the larger the portion of the partner service
+in the overall number of partners of $S$, the higher the coupling. \\ \hline \hline
+\textbf{\textit{Outgoing Coupling (OC(S))}} : $\sum_{L\in\{K\mid X\rightarrow Y\in AR_{s},S\lessdot X,K\lessdot Y\}}\frac{CID(L,S)}{NDP(S)}$ \\ 
+The same principle as for \textbf{IC}, yet applied in
+a dual manner: counts how many times the argument service
+uses other ones. \\ \hline \hline
+\textbf{\textit{Transitive Coupling (TC$(S_{a},S_{b})$)}} : $\#\{K\mid X\rightarrow Y\in AR_{s},S_{a}\lessdot X,S_{b}\lessdot Y,({[S_{a},K]\Subset X}\vee[K,S_{b}]\Subset Y)\}$ \\ 
+Metric targets the \textit{Service Chain} SOA antipattern 
+(see above). First, observe that the founding idea of \textit{Service Chain}
+is that absence of direct communication between a pair of services
+does not mean zero coupling.
+To identify transitive coupling manifestations 
+we need to capture the notion of a chain: e.g. a service $S_{a}$ is
+in the antecedent of a rule, another one $S_{b}$ is in the consequent of another
+rule and both rules are connected by means of a third service $K$
+that appears in the consequent of the first rule and in the antecedent
+of the second one. Longer chains are possible as well. Thus, in the
+basic case, one could have {[}A{]}$\rightarrow${[}B{]} and {[}B{]}$\rightarrow${[}C{]}.
+In this configuration, although A and C are not directly coupled, if C
+fails, there are good chances that A (and B) would fail too.
+\\ \hline 
+
+\end{tabular}
+\end{table*}

@@ -1,0 +1,24 @@
+\vspace{0.3cm}
+\section{Conclusions and Future Work \label{sec:Conclusions}}
+\vspace{0.2cm}
+The detection of SOA antipatterns is a crucial activity if we are to ensure
+the architectural and overall quality of SBSs. In this paper, we present a new and innovative
+approach, SOMAD, for the detection of antipatterns. The approach relies on two complementary
+techniques, from two thriving fields in software engineering, mining system traces and software measurement, respectively, both put in an SOA environment.
+More precisely, SOMAD detects SOA antipatterns by first discovering strong associations between
+services from execution traces and then filtering the resulting knowledge by means of
+domain-specific metrics. The usefulness of SOMAD was demonstrated
+by applying it to two independently developed SBS. The results of our approach, were compared to
+those of its forebear, SODA: The outcome shows that SOMAD is a relevant approach as it is substantially
+more precise (by a margin ranging from 2.6\% to 16.67\%) and efficient (2.5+ times faster) while keeping the recall to 100\%. Moreover, SOMAD has a wider coverage than SODA as it can adapt to execution traces from any SOA technology --and is potentially applicable to traces produced by OO systems-- as opposed to a narrow focus on SCA SBSs. 
+
+As a next step, we envision the application of SOMAD in the context of a large data center 
+whereby the goal would be to optimize the data center communications. 
+In the near future, we shall also investigate alternative mining techniques
+to refine our approach with additional information, e.g. directly extracting architectural
+overviews with graph pattern mining~\cite{chakrabarti2006graph}
+or, detecting recurring patterns of anomalous behavior with rare pattern mining~\cite{fca-rare:szathmary+07}.
+Finally, combining explicit semantic representations of SOA antipatterns, e.g. in OWL ontologies, with
+powerful mining methods for heterogeneous labeled graphs (see~\cite{onto-pers:adda+10})
+seems to be a particularly promising track
+for the extraction of complex structural and/or behavioral antipatterns.
